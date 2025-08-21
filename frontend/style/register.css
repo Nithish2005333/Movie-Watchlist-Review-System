@@ -74,20 +74,13 @@ body {
     }
 
     .form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(1px);
-        padding: 1.5rem 3rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        gap: 0.5rem;
-        max-width: 350px;
-        width: 90%;
-        /* ✅ better fit for small screens */
-        margin: auto;
+        width: 100%;
+        /* ✅ change from 95% to 100% */
+        padding: 1rem;
+        /* ✅ reduce padding so it doesn’t push outside */
+        gap: 0.8rem;
     }
+
 
     .form-grp {
         display: flex;
@@ -184,8 +177,8 @@ h2 {
 
 .form-grp input,
 .form-grp select {
-    width: 95%;
-    /* reduced width to avoid edges */
+    width: 100%;
+    /* ✅ change from 95% to 100% */
     margin: 0 auto;
     padding: 6px 10px;
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -196,6 +189,8 @@ h2 {
     background: rgba(255, 255, 255, 0.15);
     color: #000000;
     transition: 0.3s ease;
+    box-sizing: border-box;
+    /* ✅ add this */
 }
 
 .form-grp input::placeholder,
