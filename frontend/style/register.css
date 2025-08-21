@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+    /* ✅ ensures padding doesn’t push width beyond 100% */
+}
+
 /* Base Styles */
 body {
     background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755697627/1358834_n5dzur.jpg");
@@ -66,20 +71,24 @@ body {
 
 @media (max-width: 600px) {
     .heading-container {
-        margin: 2rem;
-        padding: 1.2rem 1.5rem;
+        margin: 1rem;
+        /* ✅ smaller margin so it doesn’t overflow */
         width: 100%;
-        text-align: center;
-        /* ✅ helps align header text */
+        max-width: 100%;
+        /* ✅ prevents horizontal scroll */
     }
+
 
     .form {
         width: 100%;
-        /* ✅ change from 95% to 100% */
+        /* ✅ take full width */
+        max-width: 100%;
+        /* ✅ prevent overflow */
         padding: 1rem;
-        /* ✅ reduce padding so it doesn’t push outside */
+        /* ✅ reduce padding so it fits */
         gap: 0.8rem;
     }
+
 
 
     .form-grp {
