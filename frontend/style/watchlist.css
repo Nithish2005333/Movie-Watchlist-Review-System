@@ -1087,18 +1087,26 @@ footer {
 
 @media (max-width: 992px) {
   body {
-    background: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755766088/pexels-philippedonn-1257860_aglpor.jpg") no-repeat center center;
-    background-size: cover;
+    background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755783677/download_6_nebgv0.jpg");
+    background-repeat: repeat;      /* repeat both vertically and horizontally */
+    background-position: top center;
+    background-size: auto;
   }
 }
 
 /* Mobile background */
 @media (max-width: 600px) {
   body {
-    background: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755766088/pexels-philippedonn-1257860_aglpor.jpg") no-repeat center center;
-    background-size: cover;
+    background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755783677/download_6_nebgv0.jpg");
+    background-repeat: repeat-y;
+    /* repeat vertically */
+    background-position: top center;
+    /* start from top center */
+    background-size: auto;
+    /* keep original size */
   }
 }
+
 
 
 /* Responsive Design (Header specific improvements) */
