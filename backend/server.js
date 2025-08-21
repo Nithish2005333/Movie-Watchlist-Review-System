@@ -28,9 +28,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files: prefer client build (for Railway), fallback to /frontend
-const clientDistPath = path.join(__dirname, '../client/dist');
+// const clientDistPath = path.join(__dirname, '../client/dist');
 const frontendPath = path.join(__dirname, '../frontend');
-app.use(express.static(clientDistPath));
+// app.use(express.static(clientDistPath));
 app.use(express.static(frontendPath));
 
 // Simple session storage (in production, use Redis or a proper session store)
@@ -310,30 +310,18 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-  const builtIndex = path.join(clientDistPath, 'index.html');
-  res.sendFile(builtIndex, (err) => {
-    if (err) {
-      res.sendFile(path.join(__dirname, '../frontend/register.html'));
-    }
-  });
+res.sendFile(path.join(__dirname, '../frontend/register.html'));
+
 });
 
 app.get('/watchlist', (req, res) => {
-  const builtIndex = path.join(clientDistPath, 'index.html');
-  res.sendFile(builtIndex, (err) => {
-    if (err) {
-      res.sendFile(path.join(__dirname, '../frontend/watchlist.html'));
-    }
-  });
+res.sendFile(path.join(__dirname, '../frontend/watchlist.html'));
+
 });
 
 app.get('/reviews', (req, res) => {
-  const builtIndex = path.join(clientDistPath, 'index.html');
-  res.sendFile(builtIndex, (err) => {
-    if (err) {
-      res.sendFile(path.join(__dirname, '../frontend/reviews.html'));
-    }
-  });
+res.sendFile(path.join(__dirname, '../frontend/reviews.html'));
+
 });
 
 // Movie API endpoints
