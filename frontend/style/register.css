@@ -52,55 +52,52 @@ body {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         gap: 0.5rem;
         max-width: 350px;
-        /* slightly reduced from 400 */
         width: 80%;
         margin: auto;
     }
 
-    /* Form group styles */
     .form-grp {
         display: flex;
         flex-direction: column;
         width: 85%;
-        /* reduced from 95% */
         margin: 0 auto;
     }
-
 }
 
 @media (max-width: 600px) {
     .heading-container {
-        margin: 2rem 2rem 2rem 2rem;
-        /* ✅ fixed: removed negative margin */
+        margin: 2rem;
         padding: 1.2rem 1.5rem;
         width: 100%;
+        text-align: center;
+        /* ✅ helps align header text */
+    }
 
-        .form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(1px);
-            padding: 1.5rem 3rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            gap: 0.5rem;
-            max-width: 350px;
-            /* slightly reduced from 400 */
-            width: 80%;
-            margin: auto;
-        }
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(1px);
+        padding: 1.5rem 3rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        gap: 0.5rem;
+        max-width: 350px;
+        width: 90%;
+        /* ✅ better fit for small screens */
+        margin: auto;
+    }
 
-        /* Form group styles */
-        .form-grp {
-            display: flex;
-            flex-direction: column;
-            width: 85%;
-            /* reduced from 95% */
-            margin: 0 auto;
-        }
+    .form-grp {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        /* ✅ full width for mobile inputs */
+        margin: 0 auto;
     }
 }
+
 
 /* Headings */
 h1 {
