@@ -4,13 +4,14 @@
   "description": "Movie Vault application with MongoDB",
   "type": "module",
   "main": "backend/server.js",
-  "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js",
-    "test-connection": "node backend/test-connection.js",
-    "build": "cd client && npm install && npm run build",
-    "postinstall": "npm run build"
-  },
+"scripts": {
+  "start": "node backend/server.js",
+  "dev": "nodemon backend/server.js",
+  "test-connection": "node backend/test-connection.js",
+  "build": "cd frontend && npm install && npm run build",
+  "postinstall": "npm run build"
+}
+,
   "keywords": ["movie", "vault", "mongodb", "express"],
   "author": "Your Name",
   "license": "MIT",
