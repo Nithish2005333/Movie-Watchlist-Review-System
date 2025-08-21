@@ -86,11 +86,6 @@ Open your browser and go to 👉 `http://localhost:3000`
 
 ---
 
-## 📸 Screenshots *(Optional)*
-
-*Add some screenshots or GIFs of your app here to make it attractive.*
-
----
 
 ## 🤝 Contributing
 
@@ -112,5 +107,6 @@ This project is licensed under the **MIT License**.
 
 **Nithishwaran A.**
 Built with ❤️ using HTML, CSS, JS, Node.js, Express, MongoDB, and vanilla JS.
+
 
 
