@@ -51,11 +51,11 @@ body {
     }
 
     .form-grp {
-        width: 50%;
+        width: 80%;
     }
 
     .form {
-        max-width: 30px;
+        max-width: 300px;
     }
 }
 
