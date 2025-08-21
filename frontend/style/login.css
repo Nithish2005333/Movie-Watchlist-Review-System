@@ -8,8 +8,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    /* changed from center so heading + form don't clash */
+    justify-content: flex-start; /* heading at top, form below */
     align-items: center;
     font-family: "Lato", sans-serif;
 }
@@ -17,19 +16,18 @@ body {
 /* Heading overlay */
 .heading-container {
     background: rgba(0, 0, 0, 0.5);
-    /* dark overlay */
     padding: 1.5rem 2rem;
     border-radius: 12px;
     text-align: center;
-    margin: 3rem 1rem 2rem 1rem;
-    /* space around heading */
+    margin: 3rem 1rem 2rem 1rem; /* normal spacing for desktop & tablet */
+    max-width: 750px;
+    width: 70%;
 }
 
 /* Ensure form spacing globally */
 .form {
-    margin-top: 2rem;
-    /* added consistent gap below heading */
-    width: 100%;
+    margin-top: 2rem; /* consistent gap below heading */
+    width: 90%;
     max-width: 400px;
 }
 
@@ -53,16 +51,26 @@ body {
 @media (max-width: 600px) {
     .heading-container {
         padding: 1rem 1.2rem;
-        margin: 1rem auto 1.5rem auto;
+        margin: 0 auto 1.5rem auto; /* ⬅ sits at very top on mobile */
         width: 90%;
     }
 
+    .heading-container h1 {
+        margin: 0.5rem 0;
+        font-size: 1.6rem;
+    }
+
+    .heading-container h2 {
+        margin: 0.3rem 0;
+        font-size: 1.2rem;
+    }
+
     .form {
-        margin-top: 1rem;
-        /* small gap on mobile */
-        width: 95%;
+        margin-top: 1rem; /* spacing from heading */
+        width: 80%;
     }
 }
+
 
 
 h1 {
