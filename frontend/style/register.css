@@ -47,7 +47,10 @@ body {
         margin: 2rem 1rem 2rem 1rem;
         /* ✅ fixed: removed negative margin */
         padding: 1.2rem 1.5rem;
-        width: 95%;
+        width: 90%;
+    }
+    .form-grp{
+        width: 50%;
     }
 }
 
