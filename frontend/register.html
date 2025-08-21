@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Registration Page</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/register.css">
+</head>
+
+<body>
+    <div class="heading-container">
+        <h1>🎬 Welcome to <span class="vault">MOVIE VAULT</span></h1>
+        <h2 id="typewriter"></h2>
+    </div>
+    <div class="form">
+        <div class="form-grp">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName">
+            <span class="error" id="firstNameError">* Please enter your first name</span>
+        </div>
+        <div class="form-grp">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+            <span class="error" id="lastNameError">* Last name should contain only letters</span>
+        </div>
+        <div class="form-grp">
+            <label for="DOB">Date of Birth:</label>
+            <input type="date" id="DOB" name="DOB">
+            <span class="error" id="DOBError">* Choose your date of birth</span>
+        </div>
+        <div class="form-grp">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="" disabled selected>Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <span class="error" id="genderError">* Please select your gender</span>
+        </div>
+        <div class="form-grp">
+            <label for="phone">Phone Number:</label>
+            <input type="number" id="phone" name="phone">
+            <span class="error" id="phoneError">* Please enter a valid 10-digit phone number</span>
+        </div>
+        <div class="form-grp">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            <span class="error" id="emailError">* Please enter a valid email</span>
+        </div>
+        <div class="form-grp">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <span class="error" id="usernameError">* Please enter a username</span>
+        </div>
+        <div class="form-grp">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError">* Password must contain at least one letter and one symbol</span>
+        </div>
+        <p>Already have account? <a href="login.html">Sign in</a></p>
+        <button class="submit-button" onclick="return validateForm()">Register</button>
+
+    </div>
+
+    <script>
+        // Typewriter effect
+        const words = ["Lights⚡", "Camera🎥", "Register🍿"];
+        let i = 0;
+        function typeWriter() {
+            const el = document.getElementById("typewriter");
+            el.innerHTML = words[i];
+            i = (i + 1) % words.length;
+            setTimeout(typeWriter, 1500);
+        }
+        window.onload = typeWriter;
+
+        // Registration API call
+        async function registerUser(userData) {
+            try {
+                const response = await fetch("/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("✅ " + result.message);
+                    window.location.href = "login.html";
+                } else {
+                    alert("❌ " + result.message);
+                }
+            } catch (err) {
+                console.error("❌ Registration error:", err);
+                alert("Registration failed. Please try again.");
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const DOB = document.getElementById("DOB").value;
+            const gender = document.getElementById("gender").value;
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+
+            // Hide all errors first
+            document.querySelectorAll(".error").forEach(el => el.style.display = "none");
+
+            if (!firstName || !/^[a-zA-Z]+$/.test(firstName)) {
+                document.getElementById("firstNameError").style.display = "inline";
+                isValid = false;
+            }
+            if (!lastName || !/^[a-zA-Z]+$/.test(lastName)) {
+                document.getElementById("lastNameError").style.display = "inline";
+                isValid = false;
+            }
+            if (!DOB) {
+                document.getElementById("DOBError").style.display = "inline";
+                isValid = false;
+            }
+            if (!gender) {
+                document.getElementById("genderError").style.display = "inline";
+                isValid = false;
+            }
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById("phoneError").style.display = "inline";
+                isValid = false;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById("emailError").style.display = "inline";
+                isValid = false;
+            }
+            if (!username) {
+                document.getElementById("usernameError").style.display = "inline";
+                isValid = false;
+            }
+            if (!/(?=.*[a-zA-Z])(?=.*[!@#$%^&*])/.test(password)) {
+                document.getElementById("passwordError").style.display = "inline";
+                isValid = false;
+            }
+
+            if (isValid) {
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    DOB: DOB,
+                    gender: gender,
+                    phone: phone,
+                    email: email,
+                    username: username,
+                    password: password
+                };
+
+                registerUser(userData);
+            }
+
+            return false;
+        }
+    </script>
+</body>
+
+</html>

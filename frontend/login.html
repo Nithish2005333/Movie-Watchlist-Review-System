@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/login.css">
+</head>
+
+<body>
+    <!-- Overlay container for headings -->
+    <div class="heading-container">
+        <h1>🎬Welcome to <span class="vault">MOVIE VAULT</span></h1>
+        <h2 id="typewriter"></h2>
+    </div>
+
+    <div class="form">
+        <div class="form-grp">
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username">
+        </div>
+
+        <div class="form-grp">
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <span class="error" id="error">*Invalid login credentials i.e Username/Password</span>
+
+        <p>New user? <a href="register.html">Register</a></p>
+        <button type="submit" onclick="validate()">Login</button>
+    </div>
+
+    <script>
+        // Typewriter effect (looping words)
+        const words = ["Lights⚡", "Camera🎥", "Login🍿"];
+        let i = 0;
+
+        function typeWriter() {
+            const el = document.getElementById("typewriter");
+            el.innerHTML = words[i];
+            i = (i + 1) % words.length;
+            setTimeout(typeWriter, 1500);
+        }
+
+        window.onload = typeWriter;
+
+        // Login validation with backend
+        async function validate() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("error");
+
+            try {
+                const response = await fetch("/api/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Store session token and user info
+                    localStorage.setItem('sessionId', result.sessionId);
+                    localStorage.setItem('user', JSON.stringify(result.user));
+                    errorMsg.style.display = "none";
+                    window.location.href = "movies.html";
+                } else {
+                    errorMsg.style.display = "inline";
+                }
+            } catch (err) {
+                console.error("❌ Fetch error:", err);
+                errorMsg.style.display = "inline";
+            }
+        }
+    </script>
+</body>
+
+</html>

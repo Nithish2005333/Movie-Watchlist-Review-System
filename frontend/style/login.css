@@ -1,0 +1,272 @@
+/* Base styles */
+body {
+    background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755702248/689398_1_bakjki.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lato", sans-serif;
+}
+
+/* Heading overlay */
+/* Base Heading Styles */
+.heading-container {
+    background: rgba(0, 0, 0, 0.5);
+    /* dark overlay */
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 3rem 1rem 2rem 1rem;
+    /* top, right, bottom, left */
+}
+
+/* Desktop / Large screens (above 992px) */
+@media (min-width: 993px) {
+    .heading-container {
+        margin-top: 3rem;
+        padding: 1.5rem 2rem;
+    }
+}
+
+/* Tablet (between 600px and 992px) */
+@media (max-width: 992px) and (min-width: 601px) {
+    .heading-container {
+        margin-top: 2rem;
+        /* move it further down */
+        padding: 1.2rem 1.8rem;
+    }
+}
+
+/* Mobile (below 600px) */
+@media (max-width: 600px) {
+    .heading-container {
+        padding: 1rem 1.2rem;
+        margin: 1rem auto 1.5rem auto;
+        /* space above + below */
+        width: 90%;
+        /* keep it narrower than form */
+    }
+
+    .form {
+        margin-top: 0;
+        /* avoid extra stacking issues */
+    }
+}
+
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+h1 .vault {
+    color: #e50914;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    animation: glow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #3bffb4, 0 0 10px #d8e618, 0 0 20px #3bffb4;
+    }
+
+    50% {
+        text-shadow: 0 0 10px #338bff, 0 0 20px #ffe033, 0 0 40px #338bff;
+    }
+
+    100% {
+        text-shadow: 0 0 5px #ff3366, 0 0 15px #ffcc33, 0 0 30px #ff3366;
+    }
+}
+
+h2 {
+    font-family: "Lato", sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 500;
+    color: #fafafa;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+#typewriter {
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: #fffbfb;
+    text-shadow: 0 0 5px #20ff0c;
+    margin-top: 15px;
+}
+
+/* Form container */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    /* dark overlay */
+    backdrop-filter: blur(1px);
+    /* subtle frosted effect */
+    padding: 1.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    gap: 1.2rem;
+    max-width: 400px;
+    width: 90%;
+    margin: auto;
+}
+
+/* Form group styles */
+.form-grp {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+
+.form-grp label {
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: #ffffff;
+    font-size: 1.3rem;
+}
+
+.form-grp input,
+.form-grp select {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #000000;
+    transition: 0.3s ease;
+}
+
+.form-grp input::placeholder,
+.form-grp select option {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-grp input:focus,
+.form-grp select:focus {
+    outline: none;
+    border: 2px solid #ff7708;
+    background: rgb(212, 212, 212);
+}
+
+/* Button styles */
+.form button {
+    background: linear-gradient(45deg, #00ccff, #d8ff2b);
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 100%;
+    color: #000000;
+}
+
+.form button:hover {
+    background: linear-gradient(45deg, #2eff2e, #ff00ff);
+}
+
+p {
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+a {
+    color: #ff1e00;
+}
+
+a:hover {
+    color: #20ff0c;
+}
+
+.error {
+    color: red;
+    display: none;
+}
+
+/* Responsive Background for Mobile */
+@media (max-width: 992px) {
+
+    h1 {
+        font-size: clamp(1.4rem, 3.5vw, 2rem);
+    }
+
+    h2,
+    #typewriter {
+        font-size: clamp(1rem, 2vw, 1.4rem);
+    }
+
+    .form {
+        padding: 1.2rem 2rem;
+        gap: 1rem;
+    }
+
+    .form-grp input,
+    .form-grp select {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    .form button {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755701700/d74b149d5a5563c981d3227f7a301d88_xoqljp.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .form {
+        padding: 1rem 1.2rem;
+        gap: 0.8rem;
+    }
+
+    .form-grp input,
+    .form-grp select {
+        padding: 8px;
+        font-size: 1rem;
+    }
+
+    .form button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: clamp(1.4rem, 5vw, 1.6rem);
+    }
+
+    h2,
+    #typewriter {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+    }
+
+    .heading-container {
+        padding: 0.8rem 1rem;
+        margin: 12rem 0.5rem -12rem 0.5rem;
+    }
+}

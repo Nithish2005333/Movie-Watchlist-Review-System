@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Vault</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700;800&family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style/movies.css">
+</head>
+
+<body>
+  <div class="film-strip top-strip"></div>
+
+  <div class="container">
+    <h1>🎬 Welcome to <span class="vault">MOVIE VAULT</span></h1>
+
+    <div class="nav-links">
+      <div class="button-wrapper"><a href="watchlist.html" class="nav-link">Watchlist</a></div>
+      <div class="button-wrapper"><button id="logoutBtn" class="logout-btn">Logout</button></div>
+      <div class="button-wrapper"><a href="reviews.html" class="nav-link">Reviews</a></div>
+    </div>
+  </div>
+
+  <div class="film-strip bottom-strip"></div>
+
+  <footer>
+    <p>&copy; 2025 Nithishwaran A. <br>All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Check if user is authenticated
+    document.addEventListener('DOMContentLoaded', () => {
+      const sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) {
+        // Redirect to login if not authenticated
+        window.location.href = '/';
+      }
+    });
+
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      const sessionId = localStorage.getItem('sessionId');
+      if (sessionId) {
+        try {
+          await fetch('/api/logout', { method: 'POST', headers: { 'Authorization': `Bearer ${sessionId}` } });
+        } catch (e) { console.error('Logout error:', e); }
+      }
+      localStorage.removeItem('sessionId');
+      localStorage.removeItem('user');
+      localStorage.removeItem('userMovies');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+
+</html>

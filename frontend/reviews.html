@@ -1,0 +1,585 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews - Movie Vault</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700;800&family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style/watchlist.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header-section">
+      <h1>⭐ <span class="vault">MOVIE VAULT</span> - Reviews</h1>
+      <div class="user-info">
+        <span id="userDisplay"></span>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="movies.html" class="nav-link">← Back</a>
+      <a href="watchlist.html" class="nav-link">Watchlist</a>
+    </div>
+
+    <div class="add-movie-section">
+      <button id="addReviewBtn" class="add-movie-btn">
+        <span class="btn-icon">⭐</span>
+        <span class="btn-text">Add New Review</span>
+      </button>
+    </div>
+
+    <div id="reviewCardsContainer" class="movie-cards-container"></div>
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <h3>⭐ No Reviews Yet</h3>
+      <p>Share your thoughts by adding your first review!</p>
+    </div>
+  </div>
+
+  <!-- Modal for Add/Edit Review -->
+  <div id="reviewModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Review</h2>
+        <span class="close">&times;</span>
+      </div>
+
+      <form id="reviewForm" class="movie-form">
+        <input type="hidden" id="reviewId" name="reviewId" value="">
+
+        <div class="form-group">
+          <label for="movieTitle">Movie Title</label>
+          <input type="text" id="movieTitle" name="title" placeholder="Enter movie title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="movieDescription">Description (optional)</label>
+          <textarea id="movieDescription" name="description" rows="3" placeholder="Short description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="movieGenres">Genres (optional)</label>
+          <input type="text" id="movieGenres" name="genres" placeholder="Comma separated (e.g., Action, Drama)">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="releaseYear">Release Year</label>
+            <input type="number" id="releaseYear" name="releaseYear" placeholder="2024" min="1900" max="2030" required>
+          </div>
+          <div class="form-group">
+            <label>Your Rating</label>
+            <div class="rating-stars" id="reviewRatingStars">
+              <button type="button" class="star" data-value="1">★</button>
+              <button type="button" class="star" data-value="2">★</button>
+              <button type="button" class="star" data-value="3">★</button>
+              <button type="button" class="star" data-value="4">★</button>
+              <button type="button" class="star" data-value="5">★</button>
+            </div>
+            <input type="hidden" id="reviewRatingValue" value="0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="posterImage">Poster Image URL (optional)</label>
+          <input type="url" id="posterImage" name="posterImage" placeholder="https://example.com/poster.jpg">
+        </div>
+
+        <div class="form-group">
+          <label for="ottPlatforms">OTT Platforms (optional)</label>
+          <input type="text" id="ottPlatforms" name="ottPlatforms" placeholder="Comma separated (e.g., Netflix, Hulu)">
+        </div>
+
+        <div class="form-group">
+          <label for="reviewText">Your Review</label>
+          <textarea id="reviewText" name="reviewText" rows="4" placeholder="Share your thoughts..."></textarea>
+          <div class="helper-text" id="reviewCounter">0/500</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reviewPros">Pros (optional)</label>
+            <textarea id="reviewPros" rows="3" placeholder="What did you like?"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="reviewCons">Cons (optional)</label>
+            <textarea id="reviewCons" rows="3" placeholder="What could be better?"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><input type="checkbox" id="isSpoiler"> Contains spoilers</label>
+          </div>
+          <div class="form-group">
+            <label>Recommend?</label>
+            <select id="recommended">
+              <option value="true" selected>Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary" id="submitBtn">Add Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Review Details Modal -->
+  <div id="reviewDetailsModal" class="modal">
+    <div class="modal-content movie-details-modal">
+      <div class="modal-header">
+        <h2 id="detailsReviewTitle"></h2>
+        <span class="close close-review-details">&times;</span>
+      </div>
+      <div class="movie-details-content">
+        <div class="movie-details-poster">
+          <img id="detailsReviewPoster" src="" alt="Movie Poster">
+        </div>
+        <div class="movie-details-info">
+          <div class="details-row">
+            <span class="details-label">Release Year:</span>
+            <span id="detailsReviewYear"></span>
+          </div>
+          <div class="details-row">
+            <span class="details-label">Your Rating:</span>
+            <span id="detailsReviewStars"></span>
+          </div>
+          <div class="details-row">
+            <span class="details-label">Genres:</span>
+            <div id="detailsReviewGenres" class="details-genres"></div>
+          </div>
+          <div class="details-row">
+            <span class="details-label">OTT Platforms:</span>
+            <div id="detailsReviewOTT" class="details-ott"></div>
+          </div>
+          <div class="details-row full-width">
+            <span class="details-label">Description:</span>
+            <p id="detailsReviewDescription"></p>
+          </div>
+          <div class="details-row full-width" id="detailsReviewTextRow" style="display:none;">
+            <span class="details-label">Your Review:</span>
+            <p id="detailsReviewText"></p>
+          </div>
+          <div class="details-row full-width" id="detailsProsConsRow" style="display:none;">
+            <span class="details-label">Notes:</span>
+            <div>
+              <div id="detailsPros" style="margin-bottom:8px;"></div>
+              <div id="detailsCons"></div>
+              <div id="detailsFlags" style="margin-top:8px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="movie-details-actions">
+        <button id="editReviewFromDetailsBtn" class="btn-primary">Edit Review</button>
+        <button id="closeReviewDetailsBtn" class="btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Nithishwaran A. <br>All rights reserved.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('reviewModal');
+    const addReviewBtn = document.getElementById('addReviewBtn');
+    const closeBtn = document.querySelector('.close');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewCardsContainer = document.getElementById('reviewCardsContainer');
+    const emptyState = document.getElementById('emptyState');
+    const modalTitle = document.getElementById('modalTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const reviewIdInput = document.getElementById('reviewId');
+    // Details modal elements
+    const reviewDetailsModal = document.getElementById('reviewDetailsModal');
+    const closeReviewDetailsBtn = document.querySelector('.close-review-details');
+    const closeReviewDetailsBottomBtn = document.getElementById('closeReviewDetailsBtn');
+    const editReviewFromDetailsBtn = document.getElementById('editReviewFromDetailsBtn');
+
+    let currentReview = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) {
+        window.location.href = 'login.html';
+        return;
+      }
+      displayUserInfo();
+      loadReviews();
+      maybeOpenMoveToReviewFlow();
+    });
+
+    addReviewBtn.onclick = () => {
+      modalTitle.textContent = 'Add Review';
+      submitBtn.textContent = 'Add Review';
+      reviewIdInput.value = '';
+      resetForm();
+      setReviewRating(0);
+      modal.style.display = 'block';
+    };
+    closeBtn.onclick = closeModal;
+    cancelBtn.onclick = closeModal;
+    window.onclick = (event) => { if (event.target === modal) closeModal(); };
+
+    function closeModal() { modal.style.display = 'none'; resetForm(); }
+    function resetForm() { reviewForm.reset(); setReviewRating(0); }
+
+    // Star widget logic
+    const reviewRatingStars = document.getElementById('reviewRatingStars');
+    const reviewRatingValue = document.getElementById('reviewRatingValue');
+    function setReviewRating(v){
+      reviewRatingValue.value = v;
+      [...reviewRatingStars.querySelectorAll('.star')].forEach(star=>{
+        const val = parseInt(star.dataset.value,10);
+        star.classList.toggle('active', val <= v);
+      });
+    }
+    if (reviewRatingStars) {
+      reviewRatingStars.addEventListener('click', (e)=>{
+        const btn = e.target.closest('.star');
+        if(!btn) return;
+        setReviewRating(parseInt(btn.dataset.value,10));
+      });
+      reviewRatingStars.addEventListener('mousemove', (e)=>{
+        const btn = e.target.closest('.star');
+        if(!btn) return;
+        const hv = parseInt(btn.dataset.value,10);
+        [...reviewRatingStars.querySelectorAll('.star')].forEach(star=>{
+          const val = parseInt(star.dataset.value,10);
+          star.classList.toggle('hover', val <= hv);
+        });
+      });
+      reviewRatingStars.addEventListener('mouseleave', ()=>{
+        [...reviewRatingStars.querySelectorAll('.star')].forEach(star=>star.classList.remove('hover'))
+      });
+      // default empty on initial page load; add modal sets to 0 too
+      setReviewRating(0);
+    }
+
+    // Review text counter
+    const reviewCounter = document.getElementById('reviewCounter');
+    const reviewTextEl = document.getElementById('reviewText');
+    function updateReviewCounter(){
+      const len = reviewTextEl.value.length;
+      reviewCounter.textContent = `${len}/500`;
+      if(len>500) reviewTextEl.value = reviewTextEl.value.slice(0,500);
+    }
+    reviewTextEl.addEventListener('input', updateReviewCounter);
+    updateReviewCounter();
+
+    reviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) { window.location.href = 'login.html'; return; }
+
+      const id = reviewIdInput.value;
+      const isEdit = !!id;
+
+      const genresRaw = document.getElementById('movieGenres').value.trim();
+      const genres = genresRaw ? genresRaw.split(',').map(g => g.trim()).filter(Boolean) : [];
+      const ottRaw = document.getElementById('ottPlatforms').value.trim();
+      const ottPlatforms = ottRaw ? ottRaw.split(',').map(p => p.trim()).filter(Boolean) : [];
+
+      const payload = {
+        title: document.getElementById('movieTitle').value.trim(),
+        description: document.getElementById('movieDescription').value.trim(),
+        genres,
+        releaseYear: parseInt(document.getElementById('releaseYear').value, 10),
+        posterImage: document.getElementById('posterImage').value.trim(),
+        ottPlatforms,
+        reviewText: document.getElementById('reviewText').value.trim(),
+        ratingStars: parseInt(document.getElementById('reviewRatingValue').value, 10),
+        reviewPros: document.getElementById('reviewPros').value.trim(),
+        reviewCons: document.getElementById('reviewCons').value.trim(),
+        isSpoiler: document.getElementById('isSpoiler').checked,
+        recommended: document.getElementById('recommended').value === 'true'
+      };
+
+      if (!payload.title || !payload.releaseYear || !(payload.ratingStars >= 1 && payload.ratingStars <= 5)) {
+        showNotification('Please fill required fields correctly', 'error');
+        return;
+      }
+
+      try {
+        let response;
+        if (!isEdit && moveFromWatchlistId) {
+          // Use move-to-review endpoint to remove from watchlist and create review
+          response = await fetch(`/api/movies/${moveFromWatchlistId}/move-to-review`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionId}` },
+            body: JSON.stringify({
+              ratingStars: payload.ratingStars,
+              reviewText: payload.reviewText,
+              reviewPros: payload.reviewPros,
+              reviewCons: payload.reviewCons,
+              isSpoiler: payload.isSpoiler,
+              recommended: payload.recommended
+            })
+          });
+        } else {
+          response = await fetch(isEdit ? `/api/reviews/${id}` : '/api/reviews', {
+            method: isEdit ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionId}` },
+            body: JSON.stringify(payload)
+          });
+        }
+        const result = await response.json();
+        if (response.ok) {
+          closeModal();
+          loadReviews();
+          showNotification(isEdit ? 'Review updated!' : 'Review added!', 'success');
+          if (moveFromWatchlistId) {
+            localStorage.removeItem('moveToReviewMovieId');
+            moveFromWatchlistId = null;
+          }
+        } else {
+          if (response.status === 401) {
+            localStorage.removeItem('sessionId');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+          } else {
+            showNotification(result.message || 'Failed to save review', 'error');
+          }
+        }
+      } catch (err) {
+        console.error('Save review error:', err);
+        showNotification('Failed to save review. Try again.', 'error');
+      }
+    });
+
+    async function loadReviews() {
+      const sessionId = localStorage.getItem('sessionId');
+      try {
+        const response = await fetch('/api/reviews', { headers: { 'Authorization': `Bearer ${sessionId}` } });
+        const result = await response.json();
+        if (response.ok) {
+          reviewCardsContainer.innerHTML = '';
+          if (result.reviews && result.reviews.length) {
+            result.reviews.forEach(r => reviewCardsContainer.appendChild(createReviewCard(r)));
+            emptyState.style.display = 'none';
+            reviewCardsContainer.style.display = 'grid';
+          } else {
+            emptyState.style.display = 'block';
+            reviewCardsContainer.style.display = 'none';
+          }
+        } else {
+          showNotification('Failed to load reviews', 'error');
+        }
+      } catch (err) {
+        console.error('Load reviews error:', err);
+        showNotification('Failed to load reviews. Check your connection.', 'error');
+      }
+    }
+
+    function createReviewCard(review) {
+      const card = document.createElement('div');
+      card.className = 'movie-card';
+      card.dataset.reviewId = review._id || review.id;
+
+      const posterUrl = review.posterImage || 'https://via.placeholder.com/400x600/667eea/ffffff?text=No+Poster';
+      const genres = review.genres || [];
+      const genresHtml = genres.length ? `<div class="movie-genres">${genres.map(g => `<span class=\"genre-tag\">${g}</span>`).join('')}</div>` : '';
+      const ottPlatforms = review.ottPlatforms || [];
+      const ottHtml = ottPlatforms.length ? `<div class=\"ott-platforms\"><strong>Available on:</strong><div class=\"ott-tags\">${ottPlatforms.map(p => `<span class=\"ott-tag\">${p}</span>`).join('')}</div></div>` : '';
+
+      const stars = '★'.repeat(Math.max(0, Math.min(5, parseInt(review.ratingStars || 0)))) + '☆'.repeat(Math.max(0, 5 - parseInt(review.ratingStars || 0)));
+
+      card.innerHTML = `
+        <div class="movie-poster">
+          <img src="${posterUrl}" alt="${review.title}" onerror="this.src='https://via.placeholder.com/400x600/667eea/ffffff?text=No+Poster'">
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">${review.title}</h3>
+          <p class="movie-year">${review.releaseYear}</p>
+          ${genresHtml}
+          <div class="movie-rating"><span class="stars">${stars}</span><span class="rating-text">${review.ratingStars}/5</span></div>
+          <div class="movie-description">${(review.description || '').substring(0, 140)}</div>
+          ${review.reviewText ? `<div class=\"movie-notes\"><strong>Your Review:</strong> ${(review.reviewText || '').substring(0, 200)}</div>` : ''}
+          ${ottHtml}
+          <div class="movie-actions">
+            <button class="btn-edit" onclick="editReview('${review._id || review.id}', event)">Edit</button>
+            <button class="btn-delete" onclick="deleteReview('${review._id || review.id}', event)">Delete</button>
+          </div>
+        </div>`;
+
+      // click to open details (exclude buttons)
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('.movie-actions')) return;
+        showReviewDetails(review);
+      });
+
+      return card;
+    }
+
+    function showReviewDetails(review) {
+      currentReview = review;
+      document.getElementById('detailsReviewTitle').textContent = review.title || '';
+      document.getElementById('detailsReviewYear').textContent = review.releaseYear || '';
+      document.getElementById('detailsReviewStars').textContent = `${'★'.repeat(parseInt(review.ratingStars||0))}${'☆'.repeat(5 - parseInt(review.ratingStars||0))} (${review.ratingStars||0}/5)`;
+
+      const posterImg = document.getElementById('detailsReviewPoster');
+      posterImg.src = review.posterImage || 'https://via.placeholder.com/400x600/667eea/ffffff?text=No+Poster';
+      posterImg.alt = review.title || '';
+
+      const genresContainer = document.getElementById('detailsReviewGenres');
+      genresContainer.innerHTML = '';
+      (review.genres || []).forEach(g => {
+        const span = document.createElement('span');
+        span.className = 'genre-tag';
+        span.textContent = g;
+        genresContainer.appendChild(span);
+      });
+
+      const ottContainer = document.getElementById('detailsReviewOTT');
+      ottContainer.innerHTML = '';
+      (review.ottPlatforms || []).forEach(p => {
+        const span = document.createElement('span');
+        span.className = 'ott-tag';
+        span.textContent = p;
+        ottContainer.appendChild(span);
+      });
+      if ((review.ottPlatforms||[]).length === 0) ottContainer.textContent = 'Not specified';
+
+      document.getElementById('detailsReviewDescription').textContent = review.description || '';
+      const textRow = document.getElementById('detailsReviewTextRow');
+      const textEl = document.getElementById('detailsReviewText');
+      if (review.reviewText) { textEl.textContent = review.reviewText; textRow.style.display = 'flex'; } else { textRow.style.display = 'none'; }
+
+      const prosConsRow = document.getElementById('detailsProsConsRow');
+      const prosEl = document.getElementById('detailsPros');
+      const consEl = document.getElementById('detailsCons');
+      const flagsEl = document.getElementById('detailsFlags');
+      prosEl.innerHTML = review.reviewPros ? `<strong>Pros:</strong> ${review.reviewPros}` : '';
+      consEl.innerHTML = review.reviewCons ? `<strong>Cons:</strong> ${review.reviewCons}` : '';
+      flagsEl.innerHTML = `<strong>Recommend:</strong> ${review.recommended ? 'Yes' : 'No'} ${review.isSpoiler ? '(Contains spoilers)' : ''}`;
+      prosConsRow.style.display = (review.reviewPros || review.reviewCons || typeof review.recommended === 'boolean' || review.isSpoiler) ? 'flex' : 'none';
+
+      reviewDetailsModal.style.display = 'block';
+    }
+
+    function closeReviewDetails() {
+      reviewDetailsModal.style.display = 'none';
+      currentReview = null;
+    }
+    closeReviewDetailsBtn.onclick = closeReviewDetails;
+    closeReviewDetailsBottomBtn.onclick = closeReviewDetails;
+    window.addEventListener('click', (e)=>{ if (e.target === reviewDetailsModal) closeReviewDetails(); });
+    editReviewFromDetailsBtn.onclick = () => { if (currentReview) { openEditModal(currentReview); closeReviewDetails(); } };
+
+    function openEditModal(review) {
+      modalTitle.textContent = 'Edit Review';
+      submitBtn.textContent = 'Update Review';
+      reviewIdInput.value = review._id || review.id;
+
+      document.getElementById('movieTitle').value = review.title || '';
+      document.getElementById('movieDescription').value = review.description || '';
+      document.getElementById('movieGenres').value = (review.genres || []).join(', ');
+      document.getElementById('releaseYear').value = review.releaseYear || '';
+      setReviewRating(review.ratingStars || 0);
+      document.getElementById('posterImage').value = review.posterImage || '';
+      document.getElementById('ottPlatforms').value = (review.ottPlatforms || []).join(', ');
+      document.getElementById('reviewText').value = review.reviewText || '';
+      document.getElementById('reviewPros').value = review.reviewPros || '';
+      document.getElementById('reviewCons').value = review.reviewCons || '';
+      document.getElementById('isSpoiler').checked = !!review.isSpoiler;
+      document.getElementById('recommended').value = String(typeof review.recommended === 'boolean' ? review.recommended : true);
+      
+      const reviewCounter = document.getElementById('reviewCounter');
+      if (reviewCounter) reviewCounter.textContent = `${(review.reviewText || '').length}/500`;
+
+      modal.style.display = 'block';
+    }
+
+    // Move-to-review flow from Watchlist
+    let moveFromWatchlistId = null;
+    async function maybeOpenMoveToReviewFlow() {
+      const pendingId = localStorage.getItem('moveToReviewMovieId');
+      if (!pendingId) return;
+      const sessionId = localStorage.getItem('sessionId');
+      try {
+        const res = await fetch('/api/movies', { headers: { 'Authorization': `Bearer ${sessionId}` } });
+        const data = await res.json();
+        if (res.ok) {
+          const movie = (data.movies || []).find(m => (m._id || m.id) === pendingId);
+          if (movie) {
+            moveFromWatchlistId = pendingId;
+            // Prefill form with movie details
+            modalTitle.textContent = 'Add Review';
+            submitBtn.textContent = 'Add Review';
+            reviewIdInput.value = '';
+            resetForm();
+            document.getElementById('movieTitle').value = movie.title || '';
+            document.getElementById('movieDescription').value = movie.description || '';
+            document.getElementById('movieGenres').value = (movie.genres || []).join(', ');
+            document.getElementById('releaseYear').value = movie.releaseYear || '';
+            document.getElementById('posterImage').value = movie.posterImage || '';
+            document.getElementById('ottPlatforms').value = (movie.ottPlatforms || []).join(', ');
+            setReviewRating(0);
+            modal.style.display = 'block';
+          }
+        }
+      } catch {}
+    }
+
+    async function deleteReview(reviewId, event) {
+      if (event) event.stopPropagation();
+      if (!confirm('Delete this review?')) return;
+      const sessionId = localStorage.getItem('sessionId');
+      try {
+        const response = await fetch(`/api/reviews/${reviewId}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${sessionId}` } });
+        const result = await response.json();
+        if (response.ok) {
+          showNotification('Review deleted', 'success');
+          loadReviews();
+        } else {
+          showNotification(result.message || 'Failed to delete review', 'error');
+        }
+      } catch (err) {
+        console.error('Delete review error:', err);
+        showNotification('Failed to delete review. Try again.', 'error');
+      }
+    }
+
+    function showNotification(message, type = 'info') {
+      document.querySelectorAll('.notification').forEach(n => n.remove());
+      const notification = document.createElement('div');
+      notification.className = `notification notification-${type}`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      setTimeout(() => { if (notification.parentElement) notification.remove(); }, 4000);
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      const sessionId = localStorage.getItem('sessionId');
+      if (sessionId) {
+        try { await fetch('/api/logout', { method: 'POST', headers: { 'Authorization': `Bearer ${sessionId}` } }); } catch {}
+      }
+      localStorage.removeItem('sessionId');
+      localStorage.removeItem('user');
+      showNotification('Logged out successfully', 'success');
+      setTimeout(() => { window.location.href = 'login.html'; }, 800);
+    });
+
+    function displayUserInfo() {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const userDisplay = document.getElementById('userDisplay');
+      if (user.firstName && user.lastName) userDisplay.textContent = `Welcome, ${user.firstName} ${user.lastName}!`;
+      else if (user.username) userDisplay.textContent = `Welcome, ${user.username}!`;
+      else userDisplay.textContent = 'Welcome!';
+    }
+  </script>
+</body>
+
+</html>
+
+

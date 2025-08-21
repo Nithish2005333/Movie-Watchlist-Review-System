@@ -1,0 +1,27 @@
+{
+  "name": "movie-vault",
+  "version": "1.0.0",
+  "description": "Movie Vault application with MongoDB",
+  "type": "module",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "test-connection": "node backend/test-connection.js",
+    "build": "cd client && npm install && npm run build",
+    "postinstall": "npm run build"
+  },
+  "keywords": ["movie", "vault", "mongodb", "express"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
