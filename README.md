@@ -1,12 +1,4 @@
-Perfect! Here's your **README** with GitHub badges added at the top. You can copy-paste this directly into your `README.md` file:
-
-````markdown
 # 🎬 Movie Watchlist Review System
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
-[![GitHub stars](https://img.shields.io/github/stars/Nithish2005333/Movie-Watchlist-Review-System?style=social)](https://github.com/Nithish2005333/Movie-Watchlist-Review-System/stargazers)  
-[![GitHub forks](https://img.shields.io/github/forks/Nithish2005333/Movie-Watchlist-Review-System?style=social)](https://github.com/Nithish2005333/Movie-Watchlist-Review-System/network)  
-[![GitHub issues](https://img.shields.io/github/issues/Nithish2005333/Movie-Watchlist-Review-System)](https://github.com/Nithish2005333/Movie-Watchlist-Review-System/issues)  
 
 A modern web application for managing your personal movie watchlist with **user authentication**, **MongoDB integration**, and a **responsive frontend**.
 
@@ -30,29 +22,27 @@ A modern web application for managing your personal movie watchlist with **user 
 - npm or yarn  
 
 ### 2. Installation
-```bash
+
 # Clone the repo
 git clone https://github.com/Nithish2005333/Movie-Watchlist-Review-System.git
 cd Movie-Watchlist-Review-System
 
 # Install dependencies
 npm install
-````
+
 
 ### 3. Set Up Environment Variables
 
 Create a `.env` file in the root directory:
 
-```env
+env
 MONGO_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/movievault
 PORT=3000
-```
 
 ### 4. Run the Application
 
-```bash
 npm start
-```
+
 
 Open your browser and go to 👉 `http://localhost:3000`
 
@@ -121,9 +111,6 @@ This project is licensed under the **MIT License**.
 ## 👨‍💻 Author
 
 **Nithishwaran A.**
-Built with ❤️ using Node.js, Express, MongoDB, and vanilla JS.
+Built with ❤️ using HTML, CSS, JS, Node.js, Express, MongoDB, and vanilla JS.
 
-```
 
-If you want, I can also **add a “Live Demo” badge** and **MongoDB badge** to make it look even more professional on GitHub. Do you want me to do that next?
-```
