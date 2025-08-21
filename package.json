@@ -8,9 +8,10 @@
   "start": "node backend/server.js",
   "dev": "nodemon backend/server.js",
   "test-connection": "node backend/test-connection.js",
-  "build": "cd frontend && npm install && npm run build",
+  "build": "npm run build --prefix frontend",
   "postinstall": "npm run build"
 }
+
 ,
   "keywords": ["movie", "vault", "mongodb", "express"],
   "author": "Your Name",
