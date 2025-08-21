@@ -7,10 +7,9 @@
 "scripts": {
   "start": "node backend/server.js",
   "dev": "nodemon backend/server.js",
-  "test-connection": "node backend/test-connection.js",
-  "build": "npm run build --prefix frontend",
-  "postinstall": "npm run build"
+  "test-connection": "node backend/test-connection.js"
 }
+
 
 ,
   "keywords": ["movie", "vault", "mongodb", "express"],
