@@ -8,7 +8,8 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* heading at top, form below */
+    justify-content: flex-start;
+    /* heading at top, form below */
     align-items: center;
     font-family: "Lato", sans-serif;
 }
@@ -19,14 +20,16 @@ body {
     padding: 1.5rem 2rem;
     border-radius: 12px;
     text-align: center;
-    margin: 3rem 1rem 2rem 1rem; /* normal spacing for desktop & tablet */
+    margin: 3rem 1rem 2rem 1rem;
+    /* normal spacing for desktop & tablet */
     max-width: 750px;
     width: 70%;
 }
 
 /* Ensure form spacing globally */
 .form {
-    margin-top: 2rem; /* consistent gap below heading */
+    margin-top: 2rem;
+    /* consistent gap below heading */
     width: 90%;
     max-width: 400px;
 }
@@ -51,22 +54,24 @@ body {
 @media (max-width: 600px) {
     .heading-container {
         padding: 1rem 1.2rem;
-        margin: 0 auto 1.5rem auto; /* ⬅ sits at very top on mobile */
+        margin: 0 auto 1.5rem auto;
+        /* ⬅ sits at very top on mobile */
         width: 90%;
     }
 
     .heading-container h1 {
-        margin: 0.5rem 0;
-        font-size: 1.6rem;
+        margin-top: 0;
+        font-size: 1.3rem;
     }
 
     .heading-container h2 {
-        margin: 0.3rem 0;
-        font-size: 1.2rem;
+        margin-top: 0;
+        font-size: 1rem;
     }
 
     .form {
-        margin-top: 0.1rem; /* spacing from heading */
+        margin-top: 0.1rem;
+        /* spacing from heading */
         width: 80%;
     }
 }
