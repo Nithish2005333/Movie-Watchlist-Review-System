@@ -49,8 +49,13 @@ body {
         padding: 1.2rem 1.5rem;
         width: 90%;
     }
-    .form-grp{
+
+    .form-grp {
         width: 50%;
+    }
+
+    .form {
+        max-width: 30px;
     }
 }
 
