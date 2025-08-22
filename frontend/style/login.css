@@ -289,3 +289,62 @@ a:hover {
         margin: 12rem 0.5rem -12rem 0.5rem;
     }
 }
+
+/* Mobile (below 600px) - Centered form both vertically and horizontally */
+@media (max-width: 600px) {
+    body {
+        background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755701700/d74b149d5a5563c981d3227f7a301d88_xoqljp.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        justify-content: center; /* Center content vertically */
+        align-items: center; /* Center content horizontally */
+        padding: 1rem;
+        min-height: 100vh;
+    }
+
+    .heading-container {
+        padding: 1rem 1.2rem;
+        margin: 0 auto 2rem auto;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .form {
+        margin: 0 auto; /* Center form */
+        width: 90%;
+        max-width: 400px;
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+    }
+
+    .form-grp {
+        width: 100%;
+        margin: 0 auto 1rem auto;
+    }
+
+    .form-grp input,
+    .form-grp select {
+        padding: 12px;
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form button {
+        padding: 12px;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: clamp(1.4rem, 5vw, 1.6rem);
+        margin-bottom: 0.5rem;
+    }
+
+    h2,
+    #typewriter {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        margin-bottom: 0.5rem;
+    }
+}

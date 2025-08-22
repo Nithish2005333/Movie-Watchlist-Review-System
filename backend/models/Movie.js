@@ -29,7 +29,7 @@ const movieSchema = new mongoose.Schema({
   rating: {
     type: Number,
     min: 0,
-    max: 10,
+    max: 11,
     default: 0
   },
   posterImage: {
@@ -38,11 +38,7 @@ const movieSchema = new mongoose.Schema({
   },
   ottPlatforms: {
     type: [String],
-    default: [],
-    enum: {
-      values: ['Netflix', 'Amazon Prime', 'Disney+', 'HBO Max', 'Hulu', 'Apple TV+', 'Peacock', 'Paramount+', 'Crunchyroll', 'YouTube Premium', 'Other'],
-      message: 'Invalid OTT platform'
-    }
+    default: []
   },
   addedBy: {
     type: mongoose.Schema.Types.ObjectId,

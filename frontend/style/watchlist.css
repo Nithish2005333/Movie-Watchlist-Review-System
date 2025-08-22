@@ -9,11 +9,9 @@ body {
   min-height: 100vh;
   color: #333;
   position: relative;
-
-  /* Default (desktop) background */
-  background: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755766255/avatar-fire-and-ash-7680x4320-23621_i2ay04.jpg") no-repeat center center;
+  background: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755766255/avatar-fire-and-ash-7680x4320-23621_i2ay04.jpg") repeat;
   background-size: cover;
-
+  background-attachment: fixed;
   overflow-x: hidden;
 }
 
@@ -104,7 +102,7 @@ body::before {
 
 .logout-btn {
   padding: 12px 24px;
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  background: linear-gradient(45deg, #FF5722, #E64A19);
   color: white;
   border: none;
   border-radius: 25px;
@@ -112,15 +110,15 @@ body::before {
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .logout-btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
-  background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+  box-shadow: 0 8px 25px rgba(255, 87, 34, 0.6);
+  background: linear-gradient(45deg, #E64A19, #FF5722);
 }
 
 /* Navigation */
@@ -134,8 +132,8 @@ body::before {
 .nav-link {
   display: inline-block;
   padding: 15px 35px;
-  background: linear-gradient(45deg, #4ecdc4, #44a08d);
-  color: rgb(0, 0, 0);
+  background: linear-gradient(45deg, #9C27B0, #673AB7);
+  color: white;
   text-decoration: none;
   font-weight: 600;
   border-radius: 10px;
@@ -143,7 +141,7 @@ body::before {
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+  box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -165,8 +163,8 @@ body::before {
 
 .nav-link:hover {
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 30px rgba(78, 205, 196, 0.6);
-  background: linear-gradient(45deg, #44a08d, #4ecdc4);
+  box-shadow: 0 12px 30px rgba(156, 39, 176, 0.6);
+  background: linear-gradient(45deg, #673AB7, #9C27B0);
 }
 
 /* Add Movie Button */
@@ -176,8 +174,8 @@ body::before {
 }
 
 .add-movie-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  color: rgb(20, 19, 19);
+  background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+  color: white;
   border: none;
   padding: 20px 50px;
   font-size: 1.4rem;
@@ -185,7 +183,7 @@ body::before {
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
@@ -212,8 +210,8 @@ body::before {
 
 .add-movie-btn:hover {
   transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.6);
-  background: linear-gradient(135deg, #764ba2 0%, #f093fb 50%, #667eea 100%);
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.6);
+  background: linear-gradient(135deg, #4ECDC4 0%, #45B7D1 50%, #FF6B6B 100%);
 }
 
 .btn-icon {
@@ -450,30 +448,36 @@ body::before {
   transition: all 0.3s ease;
 }
 
-/* EDIT button (Cyber blue glow) */
+/* Enhanced Edit Button */
 .btn-edit {
-  background: #1e90ff;
+  background: linear-gradient(45deg, #4CAF50, #45a049);
   color: white;
-  box-shadow: 0 0 15px rgba(30, 144, 255, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-edit:hover {
-  background: #0d6efd;
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 0 25px rgba(30, 144, 255, 0.9), inset 0 0 12px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(45deg, #45a049, #4CAF50);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
 }
 
-/* DELETE button (Neon red glow) */
+/* Enhanced Delete Button */
 .btn-delete {
-  background: #ff4757;
+  background: linear-gradient(45deg, #f44336, #d32f2f);
   color: white;
-  box-shadow: 0 0 15px rgba(255, 71, 87, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-delete:hover {
-  background: #e84118;
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 0 25px rgba(255, 71, 87, 0.9), inset 0 0 12px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(45deg, #d32f2f, #f44336);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
 }
 
 /* Pulse effect when hovering */
@@ -544,7 +548,6 @@ body::before {
 .modal-header h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 1px;
 }
 
@@ -775,27 +778,36 @@ body::before {
   letter-spacing: 1px;
 }
 
+/* Enhanced Primary Button */
 .btn-primary {
-  background: linear-gradient(45deg, #667eea, #764ba2);
+  background: linear-gradient(45deg, #2196F3, #1976D2);
   color: white;
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(45deg, #1976D2, #2196F3);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(33, 150, 243, 0.6);
 }
 
+/* Enhanced Secondary Button */
 .btn-secondary {
-  background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+  background: linear-gradient(45deg, #9E9E9E, #757575);
   color: white;
-  box-shadow: 0 6px 20px rgba(149, 165, 166, 0.3);
+  box-shadow: 0 6px 20px rgba(158, 158, 158, 0.4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(45deg, #7f8c8d, #95a5a6);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(149, 165, 166, 0.5);
+  background: linear-gradient(45deg, #757575, #9E9E9E);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(158, 158, 158, 0.6);
 }
 
 /* Movie Details Modal */
@@ -888,13 +900,105 @@ body::before {
   transform: scale(1.15);
 }
 
-.helper-text {
-  margin-top: 8px;
-  color: #7f8c8d;
-  font-size: 0.9rem;
+/* User Rating Display */
+.user-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  background: rgba(255, 193, 7, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
 }
 
-/* Notifications */
+.user-rating strong {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+/* Movie Review Display */
+.movie-review {
+  margin: 15px 0;
+  background: rgba(78, 205, 196, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  border-left: 4px solid #4ecdc4;
+}
+
+.movie-review strong {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+/* Enhanced Rating Stars for 10-star system */
+.rating-stars {
+  display: inline-flex;
+  gap: 4px;
+  user-select: none;
+  flex-wrap: wrap;
+}
+
+.rating-stars .star {
+  appearance: none;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #d7d7d7;
+  transition: transform 0.15s ease, color 0.15s ease, text-shadow 0.15s ease;
+  padding: 2px;
+}
+
+.rating-stars .star.hover,
+.rating-stars .star.active {
+  color: #f5b301;
+  text-shadow: 0 0 10px rgba(245, 179, 1, 0.6);
+}
+
+.rating-stars .star:hover {
+  transform: scale(1.15);
+}
+
+/* Responsive rating stars */
+@media (max-width: 768px) {
+  .rating-stars .star {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rating-stars .star {
+    font-size: 1.3rem;
+  }
+}
+
+/* Enhanced form validation styles */
+.form-group input:invalid,
+.form-group textarea:invalid {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+.form-group input:invalid:focus,
+.form-group textarea:invalid:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.3);
+}
+
+/* Custom OTT input validation */
+.custom-ott-input input:invalid {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+.custom-ott-input input:invalid:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.3);
+}
+
+/* Enhanced notification styles */
 .notification {
   position: fixed;
   top: 30px;
@@ -907,6 +1011,7 @@ body::before {
   animation: slideInRight 0.4s ease;
   max-width: 350px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 @keyframes slideInRight {
@@ -923,14 +1028,60 @@ body::before {
 
 .notification-success {
   background: linear-gradient(45deg, #2ecc71, #27ae60);
+  border-left: 4px solid #27ae60;
 }
 
 .notification-error {
   background: linear-gradient(45deg, #e74c3c, #c0392b);
+  border-left: 4px solid #c0392b;
 }
 
 .notification-info {
   background: linear-gradient(45deg, #3498db, #2980b9);
+  border-left: 4px solid #2980b9;
+}
+
+/* Enhanced helper text */
+.helper-text {
+  margin-top: 8px;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.helper-text.error {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* Enhanced form group spacing for review sections */
+.form-group + .form-group {
+  margin-top: 25px;
+}
+
+/* Review section divider */
+.form-group:has(label:contains("Your Rating")) {
+  border-top: 2px solid rgba(102, 126, 234, 0.2);
+  padding-top: 25px;
+  margin-top: 30px;
+}
+
+/* Enhanced checkbox and select styles */
+.form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.form-group select {
+  background: white;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.form-group select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
 /* Footer */
@@ -1088,22 +1239,20 @@ footer {
 @media (max-width: 992px) {
   body {
     background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755783677/download_6_nebgv0.jpg");
-    background-repeat: repeat;      /* repeat both vertically and horizontally */
+    background-repeat: repeat;
     background-position: top center;
     background-size: auto;
+    background-attachment: fixed;
   }
 }
 
-/* Mobile background */
 @media (max-width: 600px) {
   body {
     background-image: url("https://res.cloudinary.com/di2c9rec3/image/upload/v1755783677/download_6_nebgv0.jpg");
-    background-repeat: repeat-y;
-    /* repeat vertically */
+    background-repeat: repeat;
     background-position: top center;
-    /* start from top center */
     background-size: auto;
-    /* keep original size */
+    background-attachment: fixed;
   }
 }
 
@@ -1120,4 +1269,68 @@ footer {
   .header-section h1 {
     font-size: 2rem;
   }
+}
+
+/* IMDb Rating Styles */
+.imdb-rating {
+  background: linear-gradient(45deg, #f5c518, #f7d794);
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Spoiler Indicator Styles */
+.spoiler-indicator {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: spoilerPulse 2s infinite alternate;
+}
+
+@keyframes spoilerPulse {
+  from {
+    box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+  }
+  to {
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.6);
+  }
+}
+
+/* Spoiler Warning Modal Styles */
+#spoilerWarningModal .modal-content {
+  max-width: 500px;
+  text-align: center;
+}
+
+#spoilerWarningModal .modal-body {
+  padding: 30px;
+}
+
+#spoilerWarningModal .modal-body p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+#spoilerWarningModal .modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding: 20px 30px 30px;
+}
+
+#spoilerWarningModal .modal-header h2 {
+  color: #ff6b6b;
+  font-size: 1.5rem;
 }

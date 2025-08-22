@@ -348,6 +348,36 @@ app.post('/api/movies', authenticateUser, async (req, res) => {
       });
     }
 
+    // Validate release year
+    const year = parseInt(releaseYear);
+    if (isNaN(year) || year < 1800 || year > 2100) {
+      return res.status(400).json({
+        success: false,
+        message: 'Release year must be between 1800 and 2100'
+      });
+    }
+
+    // Validate rating
+    if (rating !== undefined && rating !== null) {
+      const ratingValue = parseFloat(rating);
+      if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 11) {
+        return res.status(400).json({
+          success: false,
+          message: 'Rating must be between 0 and 11'
+        });
+      }
+    }
+
+    // Validate OTT platforms
+    if (ottPlatforms !== undefined && ottPlatforms !== null) {
+      if (!Array.isArray(ottPlatforms)) {
+        return res.status(400).json({
+          success: false,
+          message: 'OTT platforms must be an array'
+        });
+      }
+    }
+
     if (mongoose.connection.readyState === 1) {
       // Use MongoDB
       const newMovie = new Movie({
@@ -512,10 +542,10 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
 
     // Validate review input
     const stars = parseInt(ratingStars, 10);
-    if (!(stars >= 1 && stars <= 5)) {
+    if (!(stars >= 1 && stars <= 10)) {
       return res.status(400).json({
         success: false,
-        message: 'ratingStars must be an integer between 1 and 5'
+        message: 'ratingStars must be an integer between 1 and 11'
       });
     }
 
@@ -537,6 +567,7 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
         ottPlatforms: movie.ottPlatforms || [],
         reviewText: reviewText || '',
         ratingStars: stars,
+        imdbRating: 0,
         reviewedBy: userId,
         sourceMovieId: movie._id,
         reviewPros: reviewPros || '',
@@ -572,6 +603,7 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
         ottPlatforms: movie.ottPlatforms || [],
         reviewText: reviewText || '',
         ratingStars: stars,
+        imdbRating: 0,
         reviewedBy: userId,
         createdAt: new Date(),
         sourceMovieId: movie.id,
@@ -627,6 +659,7 @@ app.post('/api/reviews', authenticateUser, async (req, res) => {
       ottPlatforms,
       reviewText,
       ratingStars,
+      imdbRating,
       reviewPros,
       reviewCons,
       isSpoiler,
@@ -636,9 +669,37 @@ app.post('/api/reviews', authenticateUser, async (req, res) => {
     if (!title || !releaseYear) {
       return res.status(400).json({ success: false, message: 'Title and release year are required' });
     }
+    
+    // Validate release year
+    const year = parseInt(releaseYear);
+    if (isNaN(year) || year < 1800 || year > 2100) {
+      return res.status(400).json({
+        success: false,
+        message: 'Release year must be between 1800 and 2100'
+      });
+    }
+    
     const stars = parseInt(ratingStars, 10);
-    if (!(stars >= 1 && stars <= 5)) {
-      return res.status(400).json({ success: false, message: 'ratingStars must be 1-5' });
+    if (!(stars >= 0 && stars <= 10)) {
+      return res.status(400).json({ success: false, message: 'ratingStars must be 0-10' });
+    }
+
+    // Validate IMDb rating
+    if (imdbRating !== undefined && imdbRating !== null) {
+      const imdb = parseFloat(imdbRating);
+      if (isNaN(imdb) || imdb < 0 || imdb > 10) {
+        return res.status(400).json({ success: false, message: 'IMDb rating must be between 0 and 10' });
+      }
+    }
+
+    // Validate OTT platforms
+    if (ottPlatforms !== undefined && ottPlatforms !== null) {
+      if (!Array.isArray(ottPlatforms)) {
+        return res.status(400).json({
+          success: false,
+          message: 'OTT platforms must be an array'
+        });
+      }
     }
 
     if (mongoose.connection.readyState === 1) {
@@ -651,6 +712,7 @@ app.post('/api/reviews', authenticateUser, async (req, res) => {
         ottPlatforms: Array.isArray(ottPlatforms) ? ottPlatforms : [],
         reviewText: reviewText || '',
         ratingStars: stars,
+        imdbRating: imdbRating ? parseFloat(imdbRating) : 0,
         reviewedBy: userId,
         reviewPros: reviewPros || '',
         reviewCons: reviewCons || '',
@@ -669,6 +731,7 @@ app.post('/api/reviews', authenticateUser, async (req, res) => {
         ottPlatforms: Array.isArray(ottPlatforms) ? ottPlatforms : [],
         reviewText: reviewText || '',
         ratingStars: stars,
+        imdbRating: imdbRating ? parseFloat(imdbRating) : 0,
         reviewedBy: userId,
         createdAt: new Date(),
         reviewPros: reviewPros || '',
@@ -698,15 +761,43 @@ app.put('/api/reviews/:id', authenticateUser, async (req, res) => {
       ottPlatforms,
       reviewText,
       ratingStars,
+      imdbRating,
       reviewPros,
       reviewCons,
       isSpoiler,
       recommended
     } = req.body;
 
+    // Validate release year
+    const year = parseInt(releaseYear);
+    if (isNaN(year) || year < 1800 || year > 2100) {
+      return res.status(400).json({
+        success: false,
+        message: 'Release year must be between 1800 and 2100'
+      });
+    }
+    
     const stars = parseInt(ratingStars, 10);
-    if (!(stars >= 1 && stars <= 5)) {
-      return res.status(400).json({ success: false, message: 'ratingStars must be 1-5' });
+    if (!(stars >= 0 && stars <= 10)) {
+      return res.status(400).json({ success: false, message: 'ratingStars must be 0-10' });
+    }
+
+    // Validate IMDb rating
+    if (imdbRating !== undefined && imdbRating !== null) {
+      const imdb = parseFloat(imdbRating);
+      if (isNaN(imdb) || imdb < 0 || imdb > 10) {
+        return res.status(400).json({ success: false, message: 'IMDb rating must be between 0 and 10' });
+      }
+    }
+
+    // Validate OTT platforms
+    if (ottPlatforms !== undefined && ottPlatforms !== null) {
+      if (!Array.isArray(ottPlatforms)) {
+        return res.status(400).json({
+          success: false,
+          message: 'OTT platforms must be an array'
+        });
+      }
     }
 
     if (mongoose.connection.readyState === 1) {
@@ -722,6 +813,7 @@ app.put('/api/reviews/:id', authenticateUser, async (req, res) => {
             ottPlatforms: Array.isArray(ottPlatforms) ? ottPlatforms : [],
             reviewText: reviewText || '',
             ratingStars: stars,
+            imdbRating: imdbRating ? parseFloat(imdbRating) : 0,
             reviewPros: reviewPros || '',
             reviewCons: reviewCons || '',
             isSpoiler: Boolean(isSpoiler),
@@ -749,6 +841,7 @@ app.put('/api/reviews/:id', authenticateUser, async (req, res) => {
         ottPlatforms: Array.isArray(ottPlatforms) ? ottPlatforms : [],
         reviewText: reviewText || '',
         ratingStars: stars,
+        imdbRating: imdbRating ? parseFloat(imdbRating) : 0,
         reviewPros: reviewPros || '',
         reviewCons: reviewCons || '',
         isSpoiler: Boolean(isSpoiler),

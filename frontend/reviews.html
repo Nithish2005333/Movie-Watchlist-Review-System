@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -63,35 +63,177 @@
 
         <div class="form-group">
           <label for="movieGenres">Genres (optional)</label>
-          <input type="text" id="movieGenres" name="genres" placeholder="Comma separated (e.g., Action, Drama)">
+          <div class="genre-selector">
+            <div class="selected-genres" id="selectedGenresDisplay">
+              <span class="placeholder">Click to select genres...</span>
+            </div>
+            <div class="genre-dropdown" id="genreDropdown">
+              <div class="genre-option" data-value="Action">Action</div>
+              <div class="genre-option" data-value="Adventure">Adventure</div>
+              <div class="genre-option" data-value="Animation">Animation</div>
+              <div class="genre-option" data-value="Biography">Biography</div>
+              <div class="genre-option" data-value="Comedy">Comedy</div>
+              <div class="genre-option" data-value="Crime">Crime</div>
+              <div class="genre-option" data-value="Documentary">Documentary</div>
+              <div class="genre-option" data-value="Drama">Drama</div>
+              <div class="genre-option" data-value="Family">Family</div>
+              <div class="genre-option" data-value="Fantasy">Fantasy</div>
+              <div class="genre-option" data-value="History">History</div>
+              <div class="genre-option" data-value="Horror">Horror</div>
+              <div class="genre-option" data-value="Musical">Musical</div>
+              <div class="genre-option" data-value="Mystery">Mystery</div>
+              <div class="genre-option" data-value="Romance">Romance</div>
+              <div class="genre-option" data-value="Sci-Fi">Sci-Fi</div>
+              <div class="genre-option" data-value="Sports">Sports</div>
+              <div class="genre-option" data-value="Thriller">Thriller</div>
+              <div class="genre-option" data-value="War">War</div>
+              <div class="genre-option" data-value="Western">Western</div>
+              <div class="genre-option" data-value="Superhero">Superhero</div>
+              <div class="genre-option" data-value="Slice of Life">Slice of Life</div>
+              <div class="genre-option" data-value="Psychological">Psychological</div>
+              <div class="genre-option" data-value="Suspense">Suspense</div>
+              <div class="genre-option" data-value="Political">Political</div>
+              <div class="genre-option" data-value="Period Drama">Period Drama</div>
+              <div class="genre-option" data-value="Experimental">Experimental</div>
+              <div class="genre-option" data-value="Short Films">Short Films</div>
+              <div class="genre-option" data-value="Reality">Reality</div>
+              <div class="genre-option" data-value="Talk Show">Talk Show</div>
+              <div class="genre-option" data-value="Game Show">Game Show</div>
+              <div class="genre-option" data-value="Action-Comedy">Action-Comedy</div>
+              <div class="genre-option" data-value="Black Comedy">Black Comedy</div>
+              <div class="genre-option" data-value="Dark Fantasy">Dark Fantasy</div>
+              <div class="genre-option" data-value="Paranormal">Paranormal</div>
+              <div class="genre-option" data-value="Teen">Teen</div>
+              <div class="genre-option" data-value="Coming-of-Age">Coming-of-Age</div>
+              <div class="genre-option" data-value="Martial Arts">Martial Arts</div>
+              <div class="genre-option" data-value="Spy/Espionage">Spy/Espionage</div>
+              <div class="genre-option" data-value="Heist">Heist</div>
+              <div class="genre-option" data-value="Survival">Survival</div>
+              <div class="genre-option" data-value="Disaster">Disaster</div>
+              <div class="genre-option" data-value="Cyberpunk">Cyberpunk</div>
+              <div class="genre-option" data-value="Steampunk">Steampunk</div>
+              <div class="genre-option" data-value="Post-Apocalyptic">Post-Apocalyptic</div>
+              <div class="genre-option" data-value="Dystopian">Dystopian</div>
+              <div class="genre-option" data-value="Space Opera">Space Opera</div>
+              <div class="genre-option" data-value="Gothic">Gothic</div>
+              <div class="genre-option" data-value="Tragedy">Tragedy</div>
+              <div class="genre-option" data-value="Legal/Courtroom">Legal/Courtroom</div>
+              <div class="genre-option" data-value="Medical">Medical</div>
+              <div class="genre-option" data-value="Military">Military</div>
+              <div class="genre-option" data-value="Mythology">Mythology</div>
+              <div class="genre-option" data-value="Folklore">Folklore</div>
+              <div class="genre-option" data-value="Historical Fiction">Historical Fiction</div>
+              <div class="genre-option" data-value="Anthology">Anthology</div>
+              <div class="genre-option" data-value="Romantic Comedy (Rom-Com)">Romantic Comedy (Rom-Com)</div>
+              <div class="genre-option" data-value="Drama-Comedy (Dramedy)">Drama-Comedy (Dramedy)</div>
+              <div class="genre-option" data-value="Detective/Whodunit">Detective/Whodunit</div>
+              <div class="genre-option" data-value="Educational">Educational</div>
+              <div class="genre-option" data-value="Stand-Up Comedy">Stand-Up Comedy</div>
+              <div class="genre-option" data-value="Travel">Travel</div>
+              <div class="genre-option" data-value="Cooking/Food">Cooking/Food</div>
+              <div class="genre-option" data-value="Music/Concert">Music/Concert</div>
+              <div class="genre-option" data-value="Dance">Dance</div>
+              <div class="genre-option" data-value="Idol/Pop Culture">Idol/Pop Culture</div>
+              <div class="genre-option" data-value="Ecchi">Ecchi</div>
+              <div class="genre-option" data-value="Mecha">Mecha</div>
+              <div class="genre-option" data-value="Isekai">Isekai</div>
+              <div class="genre-option" data-value="Shonen">Shonen</div>
+              <div class="genre-option" data-value="Shojo">Shojo</div>
+              <div class="genre-option" data-value="Seinen">Seinen</div>
+              <div class="genre-option" data-value="Josei">Josei</div>
+            </div>
+          </div>
+          <input type="hidden" id="selectedGenres" name="selectedGenres">
+        </div>
+
+        <div class="form-group">
+          <label for="ottPlatforms">OTT Platforms (optional)</label>
+          <div class="ott-selector">
+            <div class="selected-ott" id="selectedOTTDisplay">
+              <span class="placeholder">Click to select platforms...</span>
+            </div>
+            <div class="ott-dropdown" id="ottDropdown">
+              <div class="ott-option" data-value="Netflix">Netflix</div>
+              <div class="ott-option" data-value="Amazon Prime Video">Amazon Prime Video</div>
+              <div class="ott-option" data-value="Disney+">Disney+</div>
+              <div class="ott-option" data-value="YouTube Premium">YouTube Premium</div>
+              <div class="ott-option" data-value="JioCinema / Disney+ Hotstar">JioCinema / Disney+ Hotstar</div>
+              <div class="ott-option" data-value="WeTV">WeTV</div>
+              <div class="ott-option" data-value="Max (HBO Max)">Max (HBO Max)</div>
+              <div class="ott-option" data-value="iQiyi">iQiyi</div>
+              <div class="ott-option" data-value="Hulu">Hulu</div>
+              <div class="ott-option" data-value="Paramount+">Paramount+</div>
+              <div class="ott-option" data-value="SonyLIV">SonyLIV</div>
+              <div class="ott-option" data-value="ZEE5">ZEE5</div>
+              <div class="ott-option" data-value="MX Player">MX Player</div>
+              <div class="ott-option" data-value="Apple TV+">Apple TV+</div>
+              <div class="ott-option" data-value="Peacock">Peacock</div>
+              <div class="ott-option" data-value="Roku / The Roku Channel">Roku / The Roku Channel</div>
+              <div class="ott-option" data-value="Pluto TV">Pluto TV</div>
+              <div class="ott-option" data-value="Plex">Plex</div>
+              <div class="ott-option" data-value="Twitch">Twitch</div>
+              <div class="ott-option" data-value="TikTok TV">TikTok TV</div>
+              <div class="ott-option" data-value="Hoichoi">Hoichoi</div>
+              <div class="ott-option" data-value="Eros Now">Eros Now</div>
+              <div class="ott-option" data-value="ALTBalaji (ALTT)">ALTBalaji (ALTT)</div>
+              <div class="ott-option" data-value="Voot">Voot</div>
+              <div class="ott-option" data-value="Aha">Aha</div>
+              <div class="ott-option" data-value="Sun NXT">Sun NXT</div>
+              <div class="ott-option" data-value="Discovery+">Discovery+</div>
+              <div class="ott-option" data-value="DocuBay">DocuBay</div>
+              <div class="ott-option" data-value="ManoramaMAX">ManoramaMAX</div>
+              <div class="ott-option" data-value="ShemarooMe">ShemarooMe</div>
+              <div class="ott-option" data-value="Hungama Play">Hungama Play</div>
+              <div class="ott-option" data-value="Lionsgate Play">Lionsgate Play</div>
+              <div class="ott-option" data-value="Apple iTunes Movies">Apple iTunes Movies</div>
+              <div class="ott-option" data-value="Google TV (Movies & Shows)">Google TV (Movies & Shows)</div>
+              <div class="ott-option" data-value="Crunchyroll">Crunchyroll</div>
+              <div class="ott-option" data-value="HIDIVE">HIDIVE</div>
+              <div class="ott-option" data-value="RetroCrush">RetroCrush</div>
+              <div class="ott-option" data-value="Anime Box">Anime Box</div>
+              <div class="ott-option" data-value="d-anime Store">d-anime Store</div>
+              <div class="ott-option" data-value="Abema">Abema</div>
+              <div class="ott-option" data-value="Bilibili">Bilibili</div>
+              <div class="ott-option" data-value="Kanopy">Kanopy</div>
+              <div class="ott-option" data-value="Anime Times">Anime Times</div>
+            </div>
+          </div>
+
+          <input type="hidden" id="selectedOTT" name="selectedOTT">
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="releaseYear">Release Year</label>
-            <input type="number" id="releaseYear" name="releaseYear" placeholder="2024" min="1900" max="2030" required>
+            <input type="number" id="releaseYear" name="releaseYear" placeholder="2024" min="1800" max="2100" required>
           </div>
           <div class="form-group">
-            <label>Your Rating</label>
-            <div class="rating-stars" id="reviewRatingStars">
-              <button type="button" class="star" data-value="1">★</button>
-              <button type="button" class="star" data-value="2">★</button>
-              <button type="button" class="star" data-value="3">★</button>
-              <button type="button" class="star" data-value="4">★</button>
-              <button type="button" class="star" data-value="5">★</button>
-            </div>
-            <input type="hidden" id="reviewRatingValue" value="0">
+            <label for="imdbRating">IMDb Rating (0-10)</label>
+            <input type="number" id="imdbRating" name="imdbRating" placeholder="0" min="0" max="10" step="0.1">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Rating (0-10)</label>
+          <div class="rating-stars" id="reviewRatingStars">
+            <button type="button" class="star" data-value="0">☆</button>
+            <button type="button" class="star" data-value="1">★</button>
+            <button type="button" class="star" data-value="2">★</button>
+            <button type="button" class="star" data-value="3">★</button>
+            <button type="button" class="star" data-value="4">★</button>
+            <button type="button" class="star" data-value="5">★</button>
+            <button type="button" class="star" data-value="6">★</button>
+            <button type="button" class="star" data-value="7">★</button>
+            <button type="button" class="star" data-value="8">★</button>
+            <button type="button" class="star" data-value="9">★</button>
+            <button type="button" class="star" data-value="10">★</button>
+          </div>
+          <input type="hidden" id="reviewRatingValue" value="0">
         </div>
 
         <div class="form-group">
           <label for="posterImage">Poster Image URL (optional)</label>
           <input type="url" id="posterImage" name="posterImage" placeholder="https://example.com/poster.jpg">
-        </div>
-
-        <div class="form-group">
-          <label for="ottPlatforms">OTT Platforms (optional)</label>
-          <input type="text" id="ottPlatforms" name="ottPlatforms" placeholder="Comma separated (e.g., Netflix, Hulu)">
         </div>
 
         <div class="form-group">
@@ -132,6 +274,24 @@
     </div>
   </div>
 
+  <!-- Spoiler Warning Modal -->
+  <div id="spoilerWarningModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>⚠️ Spoiler Warning</h2>
+        <span class="close close-spoiler-warning">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>This review contains spoilers that may reveal important plot details.</p>
+        <p>Are you sure you want to continue reading?</p>
+      </div>
+      <div class="modal-actions">
+        <button id="continueReadingBtn" class="btn-primary">Continue Reading</button>
+        <button id="cancelReadingBtn" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Review Details Modal -->
   <div id="reviewDetailsModal" class="modal">
     <div class="modal-content movie-details-modal">
@@ -151,6 +311,10 @@
           <div class="details-row">
             <span class="details-label">Your Rating:</span>
             <span id="detailsReviewStars"></span>
+          </div>
+          <div class="details-row">
+            <span class="details-label">IMDb Rating:</span>
+            <span id="detailsReviewIMDb"></span>
           </div>
           <div class="details-row">
             <span class="details-label">Genres:</span>
@@ -206,9 +370,17 @@
     const closeReviewDetailsBottomBtn = document.getElementById('closeReviewDetailsBtn');
     const editReviewFromDetailsBtn = document.getElementById('editReviewFromDetailsBtn');
 
-    let currentReview = null;
+    // Spoiler warning modal elements
+    const spoilerWarningModal = document.getElementById('spoilerWarningModal');
+    const closeSpoilerWarningBtn = document.querySelector('.close-spoiler-warning');
+    const continueReadingBtn = document.getElementById('continueReadingBtn');
+    const cancelReadingBtn = document.getElementById('cancelReadingBtn');
 
-    document.addEventListener('DOMContentLoaded', () => {
+
+    let currentReview = null;
+    let pendingReviewToShow = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
       const sessionId = localStorage.getItem('sessionId');
       if (!sessionId) {
         window.location.href = 'login.html';
@@ -216,7 +388,10 @@
       }
       displayUserInfo();
       loadReviews();
-      maybeOpenMoveToReviewFlow();
+      // Check for move-to-review flow and handle it before clearing
+      await maybeOpenMoveToReviewFlow();
+      // Clear any pending move-to-review data to prevent showing previous movie
+      localStorage.removeItem('moveToReviewMovieId');
     });
 
     addReviewBtn.onclick = () => {
@@ -232,47 +407,180 @@
     window.onclick = (event) => { if (event.target === modal) closeModal(); };
 
     function closeModal() { modal.style.display = 'none'; resetForm(); }
-    function resetForm() { reviewForm.reset(); setReviewRating(0); }
+    function resetForm() {
+      reviewForm.reset();
+      setReviewRating(0);
+      selectedGenres = [];
+      selectedOTT = [];
+      if (typeof updateGenreDisplay === 'function') updateGenreDisplay();
+      if (typeof updateOTTDisplay === 'function') updateOTTDisplay();
+
+      // Clear dropdown selections
+      document.querySelectorAll('.genre-option, .ott-option').forEach(option => {
+        option.classList.remove('selected');
+      });
+    }
 
     // Star widget logic
     const reviewRatingStars = document.getElementById('reviewRatingStars');
     const reviewRatingValue = document.getElementById('reviewRatingValue');
-    function setReviewRating(v){
+    function setReviewRating(v) {
       reviewRatingValue.value = v;
-      [...reviewRatingStars.querySelectorAll('.star')].forEach(star=>{
-        const val = parseInt(star.dataset.value,10);
+      [...reviewRatingStars.querySelectorAll('.star')].forEach(star => {
+        const val = parseInt(star.dataset.value, 10);
         star.classList.toggle('active', val <= v);
       });
     }
     if (reviewRatingStars) {
-      reviewRatingStars.addEventListener('click', (e)=>{
+      reviewRatingStars.addEventListener('click', (e) => {
         const btn = e.target.closest('.star');
-        if(!btn) return;
-        setReviewRating(parseInt(btn.dataset.value,10));
+        if (!btn) return;
+        setReviewRating(parseInt(btn.dataset.value, 10));
       });
-      reviewRatingStars.addEventListener('mousemove', (e)=>{
+      reviewRatingStars.addEventListener('mousemove', (e) => {
         const btn = e.target.closest('.star');
-        if(!btn) return;
-        const hv = parseInt(btn.dataset.value,10);
-        [...reviewRatingStars.querySelectorAll('.star')].forEach(star=>{
-          const val = parseInt(star.dataset.value,10);
+        if (!btn) return;
+        const hv = parseInt(btn.dataset.value, 10);
+        [...reviewRatingStars.querySelectorAll('.star')].forEach(star => {
+          const val = parseInt(star.dataset.value, 10);
           star.classList.toggle('hover', val <= hv);
         });
       });
-      reviewRatingStars.addEventListener('mouseleave', ()=>{
-        [...reviewRatingStars.querySelectorAll('.star')].forEach(star=>star.classList.remove('hover'))
+      reviewRatingStars.addEventListener('mouseleave', () => {
+        [...reviewRatingStars.querySelectorAll('.star')].forEach(star => star.classList.remove('hover'))
       });
       // default empty on initial page load; add modal sets to 0 too
       setReviewRating(0);
     }
 
+    // Dynamic Genre Selector for Reviews
+    let selectedGenres = [];
+    const genreSelector = document.getElementById('selectedGenresDisplay');
+    const genreDropdown = document.getElementById('genreDropdown');
+
+    if (genreSelector && genreDropdown) {
+      genreSelector.addEventListener('click', () => {
+        genreDropdown.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!genreSelector.contains(e.target) && !genreDropdown.contains(e.target)) {
+          genreDropdown.classList.remove('active');
+        }
+      });
+
+      genreDropdown.addEventListener('click', (e) => {
+        if (e.target.classList.contains('genre-option')) {
+          const genre = e.target.dataset.value;
+          if (selectedGenres.includes(genre)) {
+            selectedGenres = selectedGenres.filter(g => g !== genre);
+            e.target.classList.remove('selected');
+          } else {
+            if (selectedGenres.length < 5) {
+              selectedGenres.push(genre);
+              e.target.classList.add('selected');
+            } else {
+              showNotification('Maximum 5 genres allowed', 'error');
+            }
+          }
+          updateGenreDisplay();
+        }
+      });
+
+      function updateGenreDisplay() {
+        document.getElementById('selectedGenres').value = JSON.stringify(selectedGenres);
+        if (selectedGenres.length === 0) {
+          genreSelector.innerHTML = '<span class="placeholder">Click to select genres...</span>';
+        } else {
+          genreSelector.innerHTML = selectedGenres.map(genre =>
+            `<span class="selected-tag" data-genre="${genre}">${genre}</span>`
+          ).join('');
+
+          // Add click handlers for removing tags
+          genreSelector.querySelectorAll('.selected-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const genreToRemove = tag.dataset.genre;
+              selectedGenres = selectedGenres.filter(g => g !== genreToRemove);
+              updateGenreDisplay();
+              // Update dropdown selection
+              document.querySelectorAll('.genre-option').forEach(option => {
+                if (option.dataset.value === genreToRemove) {
+                  option.classList.remove('selected');
+                }
+              });
+            });
+          });
+        }
+      }
+    }
+
+    // Dynamic OTT Selector for Reviews
+    let selectedOTT = [];
+    const ottSelector = document.getElementById('selectedOTTDisplay');
+    const ottDropdown = document.getElementById('ottDropdown');
+
+    if (ottSelector && ottDropdown) {
+      ottSelector.addEventListener('click', () => {
+        ottDropdown.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!ottSelector.contains(e.target) && !ottDropdown.contains(e.target)) {
+          ottDropdown.classList.remove('active');
+        }
+      });
+
+      ottDropdown.addEventListener('click', (e) => {
+        if (e.target.classList.contains('ott-option')) {
+          const platform = e.target.dataset.value;
+
+          if (selectedOTT.includes(platform)) {
+            selectedOTT = selectedOTT.filter(p => p !== platform);
+            e.target.classList.remove('selected');
+          } else {
+            selectedOTT.push(platform);
+            e.target.classList.add('selected');
+          }
+          updateOTTDisplay();
+        }
+      });
+
+      function updateOTTDisplay() {
+        document.getElementById('selectedOTT').value = JSON.stringify(selectedOTT);
+        if (selectedOTT.length === 0) {
+          ottSelector.innerHTML = '<span class="placeholder">Click to select platforms...</span>';
+        } else {
+          ottSelector.innerHTML = selectedOTT.map(platform =>
+            `<span class="selected-tag" data-platform="${platform}">${platform}</span>`
+          ).join('');
+
+          // Add click handlers for removing tags
+          ottSelector.querySelectorAll('.selected-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const platformToRemove = tag.dataset.platform;
+              selectedOTT = selectedOTT.filter(p => p !== platformToRemove);
+              updateOTTDisplay();
+              // Update dropdown selection for predefined platforms
+              document.querySelectorAll('.ott-option').forEach(option => {
+                if (option.dataset.value === platformToRemove) {
+                  option.classList.remove('selected');
+                }
+              });
+            });
+          });
+        }
+      }
+    }
+
     // Review text counter
     const reviewCounter = document.getElementById('reviewCounter');
     const reviewTextEl = document.getElementById('reviewText');
-    function updateReviewCounter(){
+    function updateReviewCounter() {
       const len = reviewTextEl.value.length;
       reviewCounter.textContent = `${len}/500`;
-      if(len>500) reviewTextEl.value = reviewTextEl.value.slice(0,500);
+      if (len > 500) reviewTextEl.value = reviewTextEl.value.slice(0, 500);
     }
     reviewTextEl.addEventListener('input', updateReviewCounter);
     updateReviewCounter();
@@ -285,10 +593,25 @@
       const id = reviewIdInput.value;
       const isEdit = !!id;
 
-      const genresRaw = document.getElementById('movieGenres').value.trim();
-      const genres = genresRaw ? genresRaw.split(',').map(g => g.trim()).filter(Boolean) : [];
-      const ottRaw = document.getElementById('ottPlatforms').value.trim();
-      const ottPlatforms = ottRaw ? ottRaw.split(',').map(p => p.trim()).filter(Boolean) : [];
+      const genresRaw = document.getElementById('selectedGenres').value.trim();
+      let genres = [];
+      try {
+        genres = genresRaw ? JSON.parse(genresRaw) : [];
+      } catch (e) {
+        console.error('Error parsing genres:', e);
+        genres = [];
+      }
+
+      const ottRaw = document.getElementById('selectedOTT').value.trim();
+      let ottPlatforms = [];
+      try {
+        ottPlatforms = ottRaw ? JSON.parse(ottRaw) : [];
+      } catch (e) {
+        console.error('Error parsing OTT platforms:', e);
+        ottPlatforms = [];
+      }
+
+
 
       const payload = {
         title: document.getElementById('movieTitle').value.trim(),
@@ -299,14 +622,21 @@
         ottPlatforms,
         reviewText: document.getElementById('reviewText').value.trim(),
         ratingStars: parseInt(document.getElementById('reviewRatingValue').value, 10),
+        imdbRating: parseFloat(document.getElementById('imdbRating').value) || 0,
         reviewPros: document.getElementById('reviewPros').value.trim(),
         reviewCons: document.getElementById('reviewCons').value.trim(),
         isSpoiler: document.getElementById('isSpoiler').checked,
         recommended: document.getElementById('recommended').value === 'true'
       };
 
-      if (!payload.title || !payload.releaseYear || !(payload.ratingStars >= 1 && payload.ratingStars <= 5)) {
+      if (!payload.title || !payload.releaseYear || !(payload.ratingStars >= 0 && payload.ratingStars <= 10)) {
         showNotification('Please fill required fields correctly', 'error');
+        return;
+      }
+
+      // Validate release year
+      if (isNaN(payload.releaseYear) || payload.releaseYear < 1800 || payload.releaseYear > 2100) {
+        showNotification('Release year must be between 1800 and 2100', 'error');
         return;
       }
 
@@ -353,6 +683,7 @@
         }
       } catch (err) {
         console.error('Save review error:', err);
+        console.error('Payload:', payload);
         showNotification('Failed to save review. Try again.', 'error');
       }
     });
@@ -364,6 +695,10 @@
         const result = await response.json();
         if (response.ok) {
           reviewCardsContainer.innerHTML = '';
+
+          // Store reviews in localStorage for quick access
+          localStorage.setItem('userReviews', JSON.stringify(result.reviews || []));
+
           if (result.reviews && result.reviews.length) {
             result.reviews.forEach(r => reviewCardsContainer.appendChild(createReviewCard(r)));
             emptyState.style.display = 'none';
@@ -392,20 +727,22 @@
       const ottPlatforms = review.ottPlatforms || [];
       const ottHtml = ottPlatforms.length ? `<div class=\"ott-platforms\"><strong>Available on:</strong><div class=\"ott-tags\">${ottPlatforms.map(p => `<span class=\"ott-tag\">${p}</span>`).join('')}</div></div>` : '';
 
-      const stars = '★'.repeat(Math.max(0, Math.min(5, parseInt(review.ratingStars || 0)))) + '☆'.repeat(Math.max(0, 5 - parseInt(review.ratingStars || 0)));
+      const stars = '★'.repeat(Math.max(0, Math.min(10, parseInt(review.ratingStars || 0)))) + '☆'.repeat(Math.max(0, 10 - parseInt(review.ratingStars || 0)));
 
       card.innerHTML = `
         <div class="movie-poster">
           <img src="${posterUrl}" alt="${review.title}" onerror="this.src='https://via.placeholder.com/400x600/667eea/ffffff?text=No+Poster'">
         </div>
         <div class="movie-info">
-          <h3 class="movie-title">${review.title}</h3>
-          <p class="movie-year">${review.releaseYear}</p>
-          ${genresHtml}
-          <div class="movie-rating"><span class="stars">${stars}</span><span class="rating-text">${review.ratingStars}/5</span></div>
-          <div class="movie-description">${(review.description || '').substring(0, 140)}</div>
-          ${review.reviewText ? `<div class=\"movie-notes\"><strong>Your Review:</strong> ${(review.reviewText || '').substring(0, 200)}</div>` : ''}
-          ${ottHtml}
+                     <h3 class="movie-title">${review.title}</h3>
+           <p class="movie-year">${review.releaseYear}</p>
+           ${genresHtml}
+                      <div class="movie-rating"><span class="stars">${stars}</span><span class="rating-text">${review.ratingStars}/10</span></div>
+           ${review.imdbRating > 0 ? `<div class="imdb-rating">IMDb: ${review.imdbRating}/10</div>` : ''}
+                     <div class="movie-description">${(review.description || '').substring(0, 140)}</div>
+           ${review.reviewText ? `<div class=\"movie-notes\"><strong>Your Review:</strong> ${(review.reviewText || '').substring(0, 200)}</div>` : ''}
+           ${review.isSpoiler ? '<div class="spoiler-indicator">⚠️ Contains Spoilers</div>' : ''}
+           ${ottHtml}
           <div class="movie-actions">
             <button class="btn-edit" onclick="editReview('${review._id || review.id}', event)">Edit</button>
             <button class="btn-delete" onclick="deleteReview('${review._id || review.id}', event)">Delete</button>
@@ -418,14 +755,57 @@
         showReviewDetails(review);
       });
 
+      // Add click handler for edit button that works directly
+      const editBtn = card.querySelector('.btn-edit');
+      if (editBtn) {
+        editBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          editReview(review._id || review.id, e);
+        });
+      }
+
       return card;
     }
 
     function showReviewDetails(review) {
+      // Check if review contains spoilers
+      if (review.isSpoiler) {
+        pendingReviewToShow = review;
+        spoilerWarningModal.style.display = 'block';
+        return;
+      }
+      showReviewDetailsDirectly(review);
+    }
+    // When user clicks "Continue Reading"
+    continueReadingBtn.addEventListener('click', function () {
+      if (pendingReviewToShow) {
+        showReviewDetailsDirectly(pendingReviewToShow);
+        pendingReviewToShow = null; // clear after showing
+      }
+      spoilerWarningModal.style.display = 'none';
+    });
+
+    // When user clicks "Cancel"
+    cancelReadingBtn.addEventListener('click', function () {
+      pendingReviewToShow = null; // clear review
+      spoilerWarningModal.style.display = 'none';
+    });
+
+    // When user clicks "X" close button
+    closeSpoilerWarningBtn.addEventListener('click', function () {
+      pendingReviewToShow = null;
+      spoilerWarningModal.style.display = 'none';
+    });
+
+    function showReviewDetailsDirectly(review) {
       currentReview = review;
       document.getElementById('detailsReviewTitle').textContent = review.title || '';
       document.getElementById('detailsReviewYear').textContent = review.releaseYear || '';
-      document.getElementById('detailsReviewStars').textContent = `${'★'.repeat(parseInt(review.ratingStars||0))}${'☆'.repeat(5 - parseInt(review.ratingStars||0))} (${review.ratingStars||0}/5)`;
+      document.getElementById('detailsReviewStars').textContent = `${'★'.repeat(parseInt(review.ratingStars || 0))}${'☆'.repeat(10 - parseInt(review.ratingStars || 0))} (${review.ratingStars || 0}/10)`;
+
+      // Set IMDb rating
+      const imdbRating = review.imdbRating || 0;
+      document.getElementById('detailsReviewIMDb').textContent = imdbRating > 0 ? `${imdbRating}/10` : 'Not rated';
 
       const posterImg = document.getElementById('detailsReviewPoster');
       posterImg.src = review.posterImage || 'https://via.placeholder.com/400x600/667eea/ffffff?text=No+Poster';
@@ -448,7 +828,7 @@
         span.textContent = p;
         ottContainer.appendChild(span);
       });
-      if ((review.ottPlatforms||[]).length === 0) ottContainer.textContent = 'Not specified';
+      if ((review.ottPlatforms || []).length === 0) ottContainer.textContent = 'Not specified';
 
       document.getElementById('detailsReviewDescription').textContent = review.description || '';
       const textRow = document.getElementById('detailsReviewTextRow');
@@ -471,10 +851,27 @@
       reviewDetailsModal.style.display = 'none';
       currentReview = null;
     }
+
+    function closeSpoilerWarning() {
+      spoilerWarningModal.style.display = 'none';
+      pendingReviewToShow = null;
+    }
     closeReviewDetailsBtn.onclick = closeReviewDetails;
     closeReviewDetailsBottomBtn.onclick = closeReviewDetails;
-    window.addEventListener('click', (e)=>{ if (e.target === reviewDetailsModal) closeReviewDetails(); });
+    window.addEventListener('click', (e) => { if (e.target === reviewDetailsModal) closeReviewDetails(); });
     editReviewFromDetailsBtn.onclick = () => { if (currentReview) { openEditModal(currentReview); closeReviewDetails(); } };
+
+    // Spoiler warning modal handlers
+    closeSpoilerWarningBtn.onclick = closeSpoilerWarning;
+    cancelReadingBtn.onclick = closeSpoilerWarning;
+    continueReadingBtn.onclick = () => {
+      closeSpoilerWarning();
+      if (pendingReviewToShow) {
+        showReviewDetailsDirectly(pendingReviewToShow);
+        pendingReviewToShow = null;
+      }
+    };
+    window.addEventListener('click', (e) => { if (e.target === spoilerWarningModal) closeSpoilerWarning(); });
 
     function openEditModal(review) {
       modalTitle.textContent = 'Edit Review';
@@ -483,17 +880,34 @@
 
       document.getElementById('movieTitle').value = review.title || '';
       document.getElementById('movieDescription').value = review.description || '';
-      document.getElementById('movieGenres').value = (review.genres || []).join(', ');
+      // Set genres
+      selectedGenres = Array.isArray(review.genres) ? [...review.genres] : [];
+      updateGenreDisplay();
+
+      // Update dropdown selections for genres
+      document.querySelectorAll('.genre-option').forEach(option => {
+        option.classList.toggle('selected', selectedGenres.includes(option.dataset.value));
+      });
+
       document.getElementById('releaseYear').value = review.releaseYear || '';
       setReviewRating(review.ratingStars || 0);
       document.getElementById('posterImage').value = review.posterImage || '';
-      document.getElementById('ottPlatforms').value = (review.ottPlatforms || []).join(', ');
+      document.getElementById('imdbRating').value = review.imdbRating || '';
+
+      // Set OTT platforms
+      selectedOTT = Array.isArray(review.ottPlatforms) ? [...review.ottPlatforms] : [];
+      updateOTTDisplay();
+
+      // Update dropdown selections for OTT platforms
+      document.querySelectorAll('.ott-option').forEach(option => {
+        option.classList.toggle('selected', selectedOTT.includes(option.dataset.value));
+      });
       document.getElementById('reviewText').value = review.reviewText || '';
       document.getElementById('reviewPros').value = review.reviewPros || '';
       document.getElementById('reviewCons').value = review.reviewCons || '';
       document.getElementById('isSpoiler').checked = !!review.isSpoiler;
       document.getElementById('recommended').value = String(typeof review.recommended === 'boolean' ? review.recommended : true);
-      
+
       const reviewCounter = document.getElementById('reviewCounter');
       if (reviewCounter) reviewCounter.textContent = `${(review.reviewText || '').length}/500`;
 
@@ -520,15 +934,33 @@
             resetForm();
             document.getElementById('movieTitle').value = movie.title || '';
             document.getElementById('movieDescription').value = movie.description || '';
-            document.getElementById('movieGenres').value = (movie.genres || []).join(', ');
+
+            // Set genres
+            selectedGenres = Array.isArray(movie.genres) ? [...movie.genres] : [];
+            updateGenreDisplay();
+
+            // Update dropdown selections for genres
+            document.querySelectorAll('.genre-option').forEach(option => {
+              option.classList.toggle('selected', selectedGenres.includes(option.dataset.value));
+            });
+
             document.getElementById('releaseYear').value = movie.releaseYear || '';
             document.getElementById('posterImage').value = movie.posterImage || '';
-            document.getElementById('ottPlatforms').value = (movie.ottPlatforms || []).join(', ');
+
+            // Set OTT platforms
+            selectedOTT = Array.isArray(movie.ottPlatforms) ? [...movie.ottPlatforms] : [];
+            updateOTTDisplay();
+
+            // Update dropdown selections for OTT platforms
+            document.querySelectorAll('.ott-option').forEach(option => {
+              option.classList.toggle('selected', selectedOTT.includes(option.dataset.value));
+            });
+
             setReviewRating(0);
             modal.style.display = 'block';
           }
         }
-      } catch {}
+      } catch { }
     }
 
     async function deleteReview(reviewId, event) {
@@ -550,6 +982,31 @@
       }
     }
 
+    // Function to edit review
+    function editReview(reviewId, event) {
+      if (event) {
+        event.stopPropagation();
+      }
+
+      // Check if user is authenticated
+      const sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) {
+        showNotification('Please login to edit reviews', 'error');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Get review data from stored reviews or find in current display
+      const reviews = JSON.parse(localStorage.getItem('userReviews') || '[]');
+      const review = reviews.find(r => (r._id || r.id) === reviewId);
+
+      if (review) {
+        openEditModal(review);
+      } else {
+        showNotification('Review not found', 'error');
+      }
+    }
+
     function showNotification(message, type = 'info') {
       document.querySelectorAll('.notification').forEach(n => n.remove());
       const notification = document.createElement('div');
@@ -562,7 +1019,7 @@
     document.getElementById('logoutBtn').addEventListener('click', async () => {
       const sessionId = localStorage.getItem('sessionId');
       if (sessionId) {
-        try { await fetch('/api/logout', { method: 'POST', headers: { 'Authorization': `Bearer ${sessionId}` } }); } catch {}
+        try { await fetch('/api/logout', { method: 'POST', headers: { 'Authorization': `Bearer ${sessionId}` } }); } catch { }
       }
       localStorage.removeItem('sessionId');
       localStorage.removeItem('user');
@@ -581,5 +1038,3 @@
 </body>
 
 </html>
-
-

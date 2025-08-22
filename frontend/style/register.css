@@ -29,6 +29,8 @@ body {
     max-width: 700px;
     /* prevent stretching too wide */
     width: 90%;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
 }
 
 /* Responsive heading container */
@@ -76,6 +78,8 @@ body {
         width: 100%;
         max-width: 100%;
         /* ✅ prevents horizontal scroll */
+        padding: 0.8rem 1rem;
+        white-space: normal; /* Allow wrapping on very small screens */
     }
 
 
@@ -109,6 +113,9 @@ h1 {
     color: #ffffff;
     margin-bottom: 10px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if needed */
 }
 
 h1 .vault {
@@ -140,6 +147,9 @@ h2 {
     margin-bottom: 25px;
     letter-spacing: 1px;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if needed */
 }
 
 #typewriter {
@@ -149,6 +159,9 @@ h2 {
     color: #fffbfb;
     text-shadow: 0 0 5px #20ff0c;
     margin-top: 15px;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if needed */
 }
 
 /* Form container */
