@@ -22,15 +22,15 @@ body {
 .heading-container {
     background: rgba(0, 0, 0, 0.5);
     padding: 1rem 2rem;
-    /* fixed typo */
     border-radius: 12px;
     text-align: center;
-    margin: 2rem 1rem 2rem 1rem;
+    margin: 2rem 1rem;
     max-width: 700px;
-    /* prevent stretching too wide */
     width: 90%;
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide overflow */
+    white-space: normal;
+    /* ✅ allow wrapping */
+    overflow: visible;
+    /* ✅ don’t hide text */
 }
 
 /* Responsive heading container */
@@ -74,48 +74,42 @@ body {
 @media (max-width: 600px) {
     .heading-container {
         margin: 1rem;
-        /* ✅ smaller margin so it doesn’t overflow */
         width: 100%;
         max-width: 100%;
-        /* ✅ prevents horizontal scroll */
         padding: 0.8rem 1rem;
-        white-space: normal; /* Allow wrapping on very small screens */
+        white-space: normal;
     }
-
 
     .form {
         width: 100%;
-        /* ✅ take full width */
         max-width: 100%;
-        /* ✅ prevent overflow */
         padding: 1rem;
-        /* ✅ reduce padding so it fits */
         gap: 0.8rem;
     }
-
-
 
     .form-grp {
         display: flex;
         flex-direction: column;
         width: 100%;
-        /* ✅ full width for mobile inputs */
         margin: 0 auto;
     }
 }
-
 
 /* Headings */
 h1 {
     font-family: "Montserrat", sans-serif;
     font-weight: 800;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    /* ✅ fluid scaling */
     color: #ffffff;
     margin-bottom: 10px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis if needed */
+    white-space: normal;
+    /* ✅ allow wrapping */
+    overflow: visible;
+    /* ✅ no cutting */
+    text-overflow: unset;
+    /* ✅ no ellipsis */
 }
 
 h1 .vault {
@@ -139,29 +133,23 @@ h1 .vault {
     }
 }
 
-h2 {
+h2,
+#typewriter {
     font-family: "Lato", sans-serif;
-    font-size: clamp(1.8rem, 2.5vw, 1.8rem);
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    /* ✅ fluid scaling */
     font-weight: 500;
     color: #fafafa;
     margin-bottom: 25px;
     letter-spacing: 1px;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis if needed */
-}
-
-#typewriter {
+    white-space: normal;
+    /* ✅ allow wrapping */
+    overflow: visible;
+    /* ✅ don’t hide */
+    text-overflow: unset;
+    /* ✅ no ellipsis */
     text-align: center;
-    font-family: "Lato", sans-serif;
-    font-size: clamp(1.8rem, 2.5vw, 1.8rem);
-    color: #fffbfb;
-    text-shadow: 0 0 5px #20ff0c;
-    margin-top: 15px;
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis if needed */
 }
 
 /* Form container */
@@ -176,7 +164,6 @@ h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     gap: 0.5rem;
     max-width: 380px;
-    /* slightly reduced from 400 */
     width: 90%;
     margin: auto;
 }
@@ -186,7 +173,6 @@ h2 {
     display: flex;
     flex-direction: column;
     width: 90%;
-    /* reduced from 95% */
     margin: 0 auto;
 }
 
@@ -200,7 +186,6 @@ h2 {
 .form-grp input,
 .form-grp select {
     width: 100%;
-    /* ✅ change from 95% to 100% */
     margin: 0 auto;
     padding: 6px 10px;
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -212,7 +197,6 @@ h2 {
     color: #000000;
     transition: 0.3s ease;
     box-sizing: border-box;
-    /* ✅ add this */
 }
 
 .form-grp input::placeholder,
@@ -272,33 +256,22 @@ a:hover {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+    }
 
-        h1 {
-            font-size: clamp(1.4rem, 3.5vw, 2rem);
-        }
+    .form {
+        padding: 1.2rem 2rem;
+        gap: 1rem;
+    }
 
-        h2,
-        #typewriter {
-            font-size: clamp(1rem, 2vw, 1.4rem);
-        }
+    .form-grp input,
+    .form-grp select {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
 
-        .form {
-            padding: 1.2rem 2rem;
-            gap: 1rem;
-        }
-
-        .form-grp input,
-        .form-grp select {
-            padding: 10px;
-            font-size: 0.95rem;
-            width: 100%;
-            /* better fit on tablets */
-        }
-
-        .form button {
-            padding: 10px 15px;
-            font-size: 0.95rem;
-        }
+    .form button {
+        padding: 10px 15px;
+        font-size: 0.95rem;
     }
 }
 
@@ -319,7 +292,6 @@ a:hover {
     .form-grp input,
     .form-grp select {
         width: 100%;
-        /* fit small screens */
         padding: 8px;
         font-size: 1rem;
     }
@@ -328,13 +300,17 @@ a:hover {
         padding: 10px;
         font-size: 0.9rem;
     }
+}
 
+/* Mobile screens */
+@media (max-width: 480px) {
     h1 {
-        font-size: clamp(1.4rem, 5vw, 1.6rem);
+        font-size: clamp(0.9rem, 5vw, 1.6rem);
+        /* smaller min size */
     }
 
     h2,
     #typewriter {
-        font-size: clamp(1rem, 3vw, 1.1rem);
+        font-size: clamp(0.8rem, 3vw, 1.2rem);
     }
 }
