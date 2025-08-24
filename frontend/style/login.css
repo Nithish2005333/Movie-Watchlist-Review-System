@@ -63,19 +63,19 @@ body {
         padding: 1rem 1.2rem;
         margin: 1rem auto 1.5rem auto;
         /* Add top margin back */
-        width: 100%;
+        width: 110%;
         max-width: 320px;
         /* Limit maximum width */
     }
 
     .heading-container h1 {
         margin-top: 0;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .heading-container h2 {
         margin-top: 0;
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 
     .form {
@@ -96,7 +96,7 @@ body {
         padding: 0.5rem;
         margin-bottom: 0.5rem;
         border-radius: 7px;
-        border: 2px solid rgba(0, 0, 0, 0.3);
+        border: 1px solid black;
         background: rgba(182, 181, 181, 0.9);
     }
 
