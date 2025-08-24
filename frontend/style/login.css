@@ -9,9 +9,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* heading at top, form below */
     align-items: center;
     font-family: "Lato", sans-serif;
+    padding: 0 1rem;
+    /* Add horizontal padding to body */
+    box-sizing: border-box;
 }
 
 /* Heading overlay */
@@ -21,17 +23,17 @@ body {
     border-radius: 12px;
     text-align: center;
     margin: 3rem 1rem 2rem 1rem;
-    /* normal spacing for desktop & tablet */
     max-width: 750px;
     width: 70%;
+    box-sizing: border-box;
 }
 
 /* Ensure form spacing globally */
 .form {
     margin-top: 2rem;
-    /* consistent gap below heading */
     width: 90%;
     max-width: 400px;
+    box-sizing: border-box;
 }
 
 /* Desktop / Large screens (above 992px) */
@@ -52,11 +54,18 @@ body {
 
 /* Mobile (below 600px) */
 @media (max-width: 600px) {
+    body {
+        padding: 1rem;
+        /* More padding on mobile */
+    }
+
     .heading-container {
         padding: 1rem 1.2rem;
-        margin: 0 auto 1.5rem auto;
-        /* ⬅ sits at very top on mobile */
-        width: 90%;
+        margin: 1rem auto 1.5rem auto;
+        /* Add top margin back */
+        width: 100%;
+        max-width: 320px;
+        /* Limit maximum width */
     }
 
     .heading-container h1 {
@@ -70,9 +79,33 @@ body {
     }
 
     .form {
-        margin-top: 0.1rem;
-        /* spacing from heading */
-        width: 80%;
+        margin-top: 1rem;
+        /* Increase spacing from heading */
+        width: 100%;
+        max-width: 320px;
+        /* Match heading container */
+        padding: 0;
+        /* Remove any internal padding */
+    }
+
+    /* Add form field styling for better mobile display */
+    .form input[type="text"],
+    .form input[type="password"] {
+        width: 95%;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 7px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background: rgba(182, 181, 181, 0.9);
+    }
+
+    .form button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-top: 1rem;
     }
 }
 
@@ -297,8 +330,10 @@ a:hover {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        justify-content: center; /* Center content vertically */
-        align-items: center; /* Center content horizontally */
+        justify-content: center;
+        /* Center content vertically */
+        align-items: center;
+        /* Center content horizontally */
         padding: 1rem;
         min-height: 100vh;
     }
@@ -311,7 +346,8 @@ a:hover {
     }
 
     .form {
-        margin: 0 auto; /* Center form */
+        margin: 0 auto;
+        /* Center form */
         width: 90%;
         max-width: 400px;
         padding: 1.5rem 2rem;
