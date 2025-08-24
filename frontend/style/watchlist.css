@@ -420,7 +420,12 @@ body::before {
   margin: 15px 0;
   line-height: 1.6;
   color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;       /* show only 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+
 
 .movie-notes {
   background: rgba(78, 205, 196, 0.1);
@@ -554,10 +559,12 @@ body::before {
     opacity: 0;
     transform: translateY(-80px) scale(0.8) rotateX(-10deg);
   }
+
   50% {
     opacity: 0.8;
     transform: translateY(-20px) scale(0.95) rotateX(-5deg);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1) rotateX(0deg);
@@ -1210,9 +1217,12 @@ body::before {
 
 /* Pulse animation for Move to Review button */
 @keyframes moveToReviewPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
   }
+
   50% {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.7), 0 0 25px rgba(255, 107, 107, 0.3);
   }
