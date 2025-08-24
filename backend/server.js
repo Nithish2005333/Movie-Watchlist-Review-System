@@ -538,14 +538,14 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
   try {
     const { id } = req.params;
     const userId = req.user._id;
-    const { ratingStars, reviewText, reviewPros, reviewCons, isSpoiler, recommended } = req.body;
+    const { ratingStars, reviewText, reviewPros, reviewCons, isSpoiler, recommended, imdbRating } = req.body;
 
     // Validate review input
     const stars = parseInt(ratingStars, 10);
     if (!(stars >= 1 && stars <= 10)) {
       return res.status(400).json({
         success: false,
-        message: 'ratingStars must be an integer between 1 and 11'
+        message: 'ratingStars must be an integer between 1 and 10'
       });
     }
 
@@ -558,6 +558,13 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
         });
       }
 
+      // Log the IMDb rating values for debugging
+      console.log('Move to review - IMDb rating debug:', {
+        imdbRatingFromRequest: imdbRating,
+        movieRating: movie.rating,
+        finalImdbRating: imdbRating || movie.rating || 0
+      });
+
       const review = await Review.create({
         title: movie.title,
         description: movie.description,
@@ -567,7 +574,7 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
         ottPlatforms: movie.ottPlatforms || [],
         reviewText: reviewText || '',
         ratingStars: stars,
-        imdbRating: 0,
+        imdbRating: imdbRating || movie.rating || 0,
         reviewedBy: userId,
         sourceMovieId: movie._id,
         reviewPros: reviewPros || '',
@@ -593,6 +600,14 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
       }
 
       const movie = movies[idx];
+      
+      // Log the IMDb rating values for debugging
+      console.log('Move to review (mock) - IMDb rating debug:', {
+        imdbRatingFromRequest: imdbRating,
+        movieRating: movie.rating,
+        finalImdbRating: imdbRating || movie.rating || 0
+      });
+
       const newReview = {
         id: Date.now().toString(),
         title: movie.title,
@@ -603,7 +618,7 @@ app.post('/api/movies/:id/move-to-review', authenticateUser, async (req, res) =>
         ottPlatforms: movie.ottPlatforms || [],
         reviewText: reviewText || '',
         ratingStars: stars,
-        imdbRating: 0,
+        imdbRating: imdbRating || movie.rating || 0,
         reviewedBy: userId,
         createdAt: new Date(),
         sourceMovieId: movie.id,

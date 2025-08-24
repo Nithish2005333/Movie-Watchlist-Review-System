@@ -256,7 +256,7 @@
           </div>
           
           <div class="details-row">
-            <span class="details-label">Rating:</span>
+            <span class="details-label">IMDb Rating:</span>
             <span id="detailsRating"></span>
           </div>
           
@@ -298,9 +298,42 @@
       </div>
       <form id="moveReviewForm" class="movie-form">
         <input type="hidden" id="moveReviewMovieId" value="">
+        
         <div class="form-group">
-          <label>Your Rating</label>
+          <label for="moveMovieTitle">Movie Title</label>
+          <input type="text" id="moveMovieTitle" name="title" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="moveMovieDescription">Description</label>
+          <textarea id="moveMovieDescription" name="description" rows="3" readonly></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="moveMovieGenres">Genres</label>
+          <div id="moveMovieGenresDisplay" class="genre-display"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="moveMovieOTT">OTT Platforms</label>
+          <div id="moveMovieOTTDisplay" class="ott-display"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="moveReleaseYear">Release Year</label>
+            <input type="number" id="moveReleaseYear" name="releaseYear" readonly>
+          </div>
+          <div class="form-group">
+            <label for="moveImdbRating">IMDb Rating</label>
+            <input type="number" id="moveImdbRating" name="imdbRating" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Rating (0-10)</label>
           <div class="rating-stars" id="moveRatingStars">
+            <button type="button" class="star" data-value="0">☆</button>
             <button type="button" class="star" data-value="1">★</button>
             <button type="button" class="star" data-value="2">★</button>
             <button type="button" class="star" data-value="3">★</button>
@@ -312,16 +345,42 @@
             <button type="button" class="star" data-value="9">★</button>
             <button type="button" class="star" data-value="10">★</button>
           </div>
-          <input type="hidden" id="moveRatingValue" value="10">
+          <input type="hidden" id="moveRatingValue" value="0">
         </div>
+
         <div class="form-group">
-          <label>Write a Review (optional)</label>
-          <textarea id="moveReviewText" rows="4" placeholder="Share your thoughts..."></textarea>
+          <label for="moveReviewText">Your Review</label>
+          <textarea id="moveReviewText" name="reviewText" rows="4" placeholder="Share your thoughts..."></textarea>
           <div class="helper-text" id="moveReviewCounter">0/500</div>
         </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="moveReviewPros">Pros (optional)</label>
+            <textarea id="moveReviewPros" rows="3" placeholder="What did you like?"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="moveReviewCons">Cons (optional)</label>
+            <textarea id="moveReviewCons" rows="3" placeholder="What could be better?"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><input type="checkbox" id="moveIsSpoiler"> Contains spoilers</label>
+          </div>
+          <div class="form-group">
+            <label>Recommend?</label>
+            <select id="moveRecommended">
+              <option value="true" selected>Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-actions">
           <button type="button" id="moveCancelBtn" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary">Confirm Move</button>
+          <button type="submit" class="btn-primary">Move to Reviews</button>
         </div>
       </form>
     </div>
@@ -462,9 +521,52 @@
     }
 
     function openMoveToReviewModalFor(movieId) {
+      // Get movie data from stored movies
+      const movies = JSON.parse(localStorage.getItem('userMovies') || '[]');
+      const movie = movies.find(m => (m._id || m.id) === movieId);
+      
+      if (!movie) {
+        showNotification('Movie not found', 'error');
+        return;
+      }
+
+      // Populate form with movie data
       moveReviewMovieId.value = movieId;
-      setMoveRating(5);
-      moveReviewText.value = '';
+      document.getElementById('moveMovieTitle').value = movie.title || '';
+      document.getElementById('moveMovieDescription').value = movie.description || '';
+      document.getElementById('moveReleaseYear').value = movie.releaseYear || '';
+      document.getElementById('moveImdbRating').value = movie.rating || '';
+      
+      // Set genres display
+      const genresDisplay = document.getElementById('moveMovieGenresDisplay');
+      const genres = movie.genres || (movie.genre ? [movie.genre] : []);
+      if (genres.length > 0) {
+        genresDisplay.innerHTML = genres.map(genre => 
+          `<span class="genre-tag">${genre}</span>`
+        ).join('');
+      } else {
+        genresDisplay.innerHTML = '<span class="placeholder">No genres specified</span>';
+      }
+      
+      // Set OTT platforms display
+      const ottDisplay = document.getElementById('moveMovieOTTDisplay');
+      const ottPlatforms = movie.ottPlatforms || [];
+      if (ottPlatforms.length > 0) {
+        ottDisplay.innerHTML = ottPlatforms.map(platform => 
+          `<span class="ott-tag">${platform}</span>`
+        ).join('');
+      } else {
+        ottDisplay.innerHTML = '<span class="placeholder">No platforms specified</span>';
+      }
+      
+      // Reset form fields
+      setMoveRating(0);
+      document.getElementById('moveReviewText').value = '';
+      document.getElementById('moveReviewPros').value = '';
+      document.getElementById('moveReviewCons').value = '';
+      document.getElementById('moveIsSpoiler').checked = false;
+      document.getElementById('moveRecommended').value = 'true';
+      
       updateMoveCounter();
       moveReviewModal.style.display = 'block';
     }
@@ -607,8 +709,8 @@
           <p class="movie-year">${movie.releaseYear}</p>
           ${genresHtml}
           <div class="movie-rating">
-            <span class="stars">${'★'.repeat(Math.floor(movie.rating || 0))}${'☆'.repeat(11 - Math.floor(movie.rating || 0))}</span>
-            <span class="rating-text">${movie.rating || 0}/11</span>
+            <span class="stars">${'★'.repeat(Math.floor(movie.rating || 0))}${'☆'.repeat(10 - Math.floor(movie.rating || 0))}</span>
+            <span class="rating-text">IMDb: ${movie.rating || 0}/10</span>
           </div>
           <div class="movie-description">
             ${descriptionPreview}
@@ -618,7 +720,7 @@
           <div class="movie-actions">
             <button class="btn-edit" onclick="editMovie('${movie._id || movie.id}', event)">Edit</button>
             <button class="btn-delete" onclick="deleteMovie('${movie._id || movie.id}', event)">Delete</button>
-            <button class="btn-primary" onclick=('${movie._id || movie.id}', event)">Move to Review</button>
+            <button class="btn-primary" onclick="moveToReview('${movie._id || movie.id}', event)">Move to Review</button>
           </div>
         </div>
       `;
@@ -826,9 +928,8 @@
         window.location.href = 'login.html';
         return;
       }
-      // Store the movie id and redirect to Reviews page to open full form
-      localStorage.setItem('moveToReviewMovieId', movieId);
-      window.location.href = 'reviews.html';
+      // Open the move to review modal
+      openMoveToReviewModalFor(movieId);
     }
 
     // Star rating interactions for Move to Review
@@ -870,15 +971,37 @@
       const sessionId = localStorage.getItem('sessionId');
       const movieId = moveReviewMovieId.value;
       const ratingStars = parseInt(moveRatingValue.value, 10);
-      const reviewText = moveReviewText.value.trim();
+      const reviewText = document.getElementById('moveReviewText').value.trim();
+      const reviewPros = document.getElementById('moveReviewPros').value.trim();
+      const reviewCons = document.getElementById('moveReviewCons').value.trim();
+      const isSpoiler = document.getElementById('moveIsSpoiler').checked;
+      const recommended = document.getElementById('moveRecommended').value === 'true';
+      
       try {
+        // Get the IMDb rating from the form
+        const imdbRating = parseFloat(document.getElementById('moveImdbRating').value) || 0;
+        
+        // Debug logging
+        console.log('Watchlist move to review - IMDb rating debug:', {
+          imdbRatingFromForm: imdbRating,
+          formElement: document.getElementById('moveImdbRating').value
+        });
+        
         const response = await fetch(`/api/movies/${movieId}/move-to-review`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${sessionId}`
           },
-          body: JSON.stringify({ ratingStars, reviewText })
+          body: JSON.stringify({ 
+            ratingStars, 
+            reviewText,
+            reviewPros,
+            reviewCons,
+            isSpoiler,
+            recommended,
+            imdbRating
+          })
         });
         const result = await response.json();
         if (response.ok) {

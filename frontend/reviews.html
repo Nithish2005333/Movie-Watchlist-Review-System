@@ -643,6 +643,12 @@
       try {
         let response;
         if (!isEdit && moveFromWatchlistId) {
+          // Debug logging
+          console.log('Reviews move to review - IMDb rating debug:', {
+            payloadImdbRating: payload.imdbRating,
+            formElement: document.getElementById('imdbRating').value
+          });
+          
           // Use move-to-review endpoint to remove from watchlist and create review
           response = await fetch(`/api/movies/${moveFromWatchlistId}/move-to-review`, {
             method: 'POST',
@@ -653,7 +659,8 @@
               reviewPros: payload.reviewPros,
               reviewCons: payload.reviewCons,
               isSpoiler: payload.isSpoiler,
-              recommended: payload.recommended
+              recommended: payload.recommended,
+              imdbRating: payload.imdbRating
             })
           });
         } else {
@@ -737,8 +744,8 @@
                      <h3 class="movie-title">${review.title}</h3>
            <p class="movie-year">${review.releaseYear}</p>
            ${genresHtml}
-                      <div class="movie-rating"><span class="stars">${stars}</span><span class="rating-text">${review.ratingStars}/10</span></div>
-           ${review.imdbRating > 0 ? `<div class="imdb-rating">IMDb: ${review.imdbRating}/10</div>` : ''}
+                      <div class="movie-rating"><span class="stars">${stars}</span><span class="rating-text">Your Rating: ${review.ratingStars}/10</span></div>
+                       ${(review.imdbRating || review.rating || 0) > 0 ? `<div class="imdb-rating">IMDb: ${review.imdbRating || review.rating || 0}/10</div>` : ''}
                      <div class="movie-description">${(review.description || '').substring(0, 140)}</div>
            ${review.reviewText ? `<div class=\"movie-notes\"><strong>Your Review:</strong> ${(review.reviewText || '').substring(0, 200)}</div>` : ''}
            ${review.isSpoiler ? '<div class="spoiler-indicator">⚠️ Contains Spoilers</div>' : ''}
@@ -803,9 +810,9 @@
       document.getElementById('detailsReviewYear').textContent = review.releaseYear || '';
       document.getElementById('detailsReviewStars').textContent = `${'★'.repeat(parseInt(review.ratingStars || 0))}${'☆'.repeat(10 - parseInt(review.ratingStars || 0))} (${review.ratingStars || 0}/10)`;
 
-      // Set IMDb rating
-      const imdbRating = review.imdbRating || 0;
-      document.getElementById('detailsReviewIMDb').textContent = imdbRating > 0 ? `${imdbRating}/10` : 'Not rated';
+             // Set IMDb rating - check both imdbRating and rating fields
+       const imdbRating = review.imdbRating || review.rating || 0;
+       document.getElementById('detailsReviewIMDb').textContent = imdbRating > 0 ? `${imdbRating}/10` : 'Not rated';
 
       const posterImg = document.getElementById('detailsReviewPoster');
       posterImg.src = review.posterImage || 'https://via.placeholder.com/400x600/667eea/ffffff?text=No+Poster';
@@ -946,6 +953,10 @@
 
             document.getElementById('releaseYear').value = movie.releaseYear || '';
             document.getElementById('posterImage').value = movie.posterImage || '';
+            
+                         // Set IMDb Rating - use movie.rating which contains the IMDb rating from watchlist
+             const imdbRating = movie.rating || movie.imdbRating || 0;
+             document.getElementById('imdbRating').value = imdbRating;
 
             // Set OTT platforms
             selectedOTT = Array.isArray(movie.ottPlatforms) ? [...movie.ottPlatforms] : [];
