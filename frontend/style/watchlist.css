@@ -414,28 +414,51 @@ body::before {
   box-shadow: 0 2px 6px rgba(78, 205, 196, 0.3);
 }
 
-/* Description and Notes */
-.movie-description,
-.movie-notes {
-  margin: 15px 0;
-  line-height: 1.6;
-  color: #555;
+/* Keep truncation only for card displays - show more lines */
+.movie-card .movie-description,
+.movie-card .movie-notes {
   display: -webkit-box;
-  -webkit-line-clamp: 3;       /* show only 3 lines */
+  -webkit-line-clamp: 3;
+  /* Show 6 lines for better preview */
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  max-height: calc(1.5em * 6);
+  /* Ensure consistent height */
 }
 
-
-.movie-notes {
+/* Styling for movie-notes in cards only */
+.movie-card .movie-notes {
   background: rgba(78, 205, 196, 0.1);
   padding: 15px;
   border-radius: 12px;
   border-left: 4px solid #4ecdc4;
 }
 
-.movie-notes strong {
+.movie-card .movie-notes strong {
   color: #2c3e50;
+}
+
+/* Remove truncation for modal details */
+.movie-details-modal .detailsReviewText,
+.movie-details-content .detailsReviewText {
+  display: block;
+  overflow: visible;
+  text-overflow: initial;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: initial;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Update the original rule to be more specific */
+.movie-description,
+.movie-notes,
+.detailsReviewText {
+  margin: 15px 0;
+  line-height: 1.6;
+  color: #555;
 }
 
 /* ================= MOVIE ACTION BUTTONS ================= */
